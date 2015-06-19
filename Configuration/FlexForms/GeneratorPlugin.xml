@@ -1,0 +1,228 @@
+<T3DataStructure>
+	<sheets>
+		<sDEF>
+			<ROOT>
+				<TCEforms>
+					<sheetTitle>LLL:EXT:beaconizer/Resources/Private/Language/locallang_db.xml:plugin.sheet.general</sheetTitle>
+				</TCEforms>
+				<type>array</type>
+				<el>
+
+					<settings.meta.PREFIX>
+						<TCEforms>
+							<label>LLL:EXT:beaconizer/Resources/Private/Language/locallang_db.xml:tx_beaconizer_domain_model_providers.prefix</label>
+							<config>
+								<type>input</type>
+								<size>50</size>
+								<eval>trim</eval>
+								<default>http://d-nb.info/gnd/</default>
+							</config>
+						</TCEforms>
+					</settings.meta.PREFIX>
+
+					<settings.meta.TARGET>
+						<TCEforms>
+							<label>LLL:EXT:beaconizer/Resources/Private/Language/locallang_db.xml:tx_beaconizer_domain_model_providers.target</label>
+							<config>
+								<type>input</type>
+								<size>50</size>
+								<eval>trim</eval>
+								<default>http://example.org/dir/{ID}</default>
+							</config>
+						</TCEforms>
+					</settings.meta.TARGET>
+
+					<settings.meta.RELATION>
+						<TCEforms>
+							<label>LLL:EXT:beaconizer/Resources/Private/Language/locallang_db.xml:tx_beaconizer_domain_model_providers.relation</label>
+							<config>
+								<type>input</type>
+								<size>50</size>
+								<eval>trim</eval>
+								<default>http://www.w3.org/2000/01/rdf-schema#seeAlso</default>
+							</config>
+						</TCEforms>
+					</settings.meta.RELATION>
+
+					<settings.meta.MESSAGE>
+						<TCEforms>
+							<label>LLL:EXT:beaconizer/Resources/Private/Language/locallang_db.xml:tx_beaconizer_domain_model_providers.message</label>
+							<config>
+								<type>input</type>
+								<size>50</size>
+								<eval>trim</eval>
+							</config>
+						</TCEforms>
+					</settings.meta.MESSAGE>
+
+					<settings.meta.ANNOTATION>
+						<TCEforms>
+							<label>LLL:EXT:beaconizer/Resources/Private/Language/locallang_db.xml:tx_beaconizer_domain_model_providers.annotation</label>
+							<config>
+								<type>input</type>
+								<size>50</size>
+								<eval>trim</eval>
+							</config>
+						</TCEforms>
+					</settings.meta.ANNOTATION>
+
+					<settings.meta.DESCRIPTION>
+						<TCEforms>
+							<label>LLL:EXT:beaconizer/Resources/Private/Language/locallang_db.xml:tx_beaconizer_domain_model_providers.description</label>
+							<config>
+								<type>input</type>
+								<size>50</size>
+								<eval>trim</eval>
+							</config>
+						</TCEforms>
+					</settings.meta.DESCRIPTION>
+
+					<settings.meta.CREATOR>
+						<TCEforms>
+							<label>LLL:EXT:beaconizer/Resources/Private/Language/locallang_db.xml:tx_beaconizer_domain_model_providers.creator</label>
+							<config>
+								<type>input</type>
+								<size>50</size>
+								<eval>trim</eval>
+							</config>
+						</TCEforms>
+					</settings.meta.CREATOR>
+
+					<settings.meta.CONTACT>
+						<TCEforms>
+							<label>LLL:EXT:beaconizer/Resources/Private/Language/locallang_db.xml:tx_beaconizer_domain_model_providers.contact</label>
+							<config>
+								<type>input</type>
+								<size>50</size>
+								<eval>trim</eval>
+								<default>name &lt;name@domain.tld&gt;</default>
+							</config>
+						</TCEforms>
+					</settings.meta.CONTACT>
+
+					<settings.meta.HOMEPAGE>
+						<TCEforms>
+							<label>LLL:EXT:beaconizer/Resources/Private/Language/locallang_db.xml:tx_beaconizer_domain_model_providers.homepage</label>
+							<config>
+								<type>input</type>
+								<size>50</size>
+								<eval>trim</eval>
+							</config>
+						</TCEforms>
+					</settings.meta.HOMEPAGE>
+
+					<settings.meta.FEED>
+						<TCEforms>
+							<label>LLL:EXT:beaconizer/Resources/Private/Language/locallang_db.xml:tx_beaconizer_domain_model_providers.feed</label>
+							<config>
+								<type>input</type>
+								<size>50</size>
+								<eval>trim</eval>
+								<default>http://example.org/</default>
+							</config>
+						</TCEforms>
+					</settings.meta.FEED>
+
+					<settings.meta.TIMESTAMP>
+						<TCEforms>
+							<label>LLL:EXT:beaconizer/Resources/Private/Language/locallang_db.xml:tx_beaconizer_domain_model_providers.timestamp</label>
+							<config>
+								<type>input</type>
+								<size>50</size>
+								<eval>datetime</eval>
+							</config>
+						</TCEforms>
+					</settings.meta.TIMESTAMP>
+
+					<settings.meta.UPDATE>
+						<TCEforms>
+							<label>LLL:EXT:beaconizer/Resources/Private/Language/locallang_db.xml:tx_beaconizer_domain_model_providers.update_information</label>
+							<config>
+								<type>select</type>
+								<items type="array">
+									<numIndex index="0" type="array">
+										<numIndex index="0"></numIndex>
+										<numIndex index="1"></numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
+										<numIndex index="0">always</numIndex>
+										<numIndex index="1">always</numIndex>
+									</numIndex>
+									<numIndex index="2" type="array">
+										<numIndex index="0">hourly</numIndex>
+										<numIndex index="1">hourly</numIndex>
+									</numIndex>
+									<numIndex index="3" type="array">
+										<numIndex index="0">daily</numIndex>
+										<numIndex index="1">daily</numIndex>
+									</numIndex>
+									<numIndex index="4" type="array">
+										<numIndex index="0">weekly</numIndex>
+										<numIndex index="1">weekly</numIndex>
+									</numIndex>
+									<numIndex index="5" type="array">
+										<numIndex index="0">monthly</numIndex>
+										<numIndex index="1">monthly</numIndex>
+									</numIndex>
+									<numIndex index="6" type="array">
+										<numIndex index="0">yearly</numIndex>
+										<numIndex index="1">yearly</numIndex>
+									</numIndex>
+									<numIndex index="7" type="array">
+										<numIndex index="0">never</numIndex>
+										<numIndex index="1">never</numIndex>
+									</numIndex>
+								</items>
+							</config>
+						</TCEforms>
+					</settings.meta.UPDATE>
+
+					<settings.meta.SOURCESET>
+						<TCEforms>
+							<label>LLL:EXT:beaconizer/Resources/Private/Language/locallang_db.xml:tx_beaconizer_domain_model_providers.sourceset</label>
+							<config>
+								<type>input</type>
+								<size>50</size>
+								<eval>trim</eval>
+							</config>
+						</TCEforms>
+					</settings.meta.SOURCESET>
+
+					<settings.meta.TARGETSET>
+						<TCEforms>
+							<label>LLL:EXT:beaconizer/Resources/Private/Language/locallang_db.xml:tx_beaconizer_domain_model_providers.targetset</label>
+							<config>
+								<type>input</type>
+								<size>50</size>
+								<eval>trim</eval>
+							</config>
+						</TCEforms>
+					</settings.meta.TARGETSET>
+
+					<settings.meta.NAME>
+						<TCEforms>
+							<label>LLL:EXT:beaconizer/Resources/Private/Language/locallang_db.xml:tx_beaconizer_domain_model_providers.name</label>
+							<config>
+								<type>input</type>
+								<size>50</size>
+								<eval>trim</eval>
+							</config>
+						</TCEforms>
+					</settings.meta.NAME>
+
+					<settings.meta.INSTITUTION>
+						<TCEforms>
+							<label>LLL:EXT:beaconizer/Resources/Private/Language/locallang_db.xml:tx_beaconizer_domain_model_providers.institution</label>
+							<config>
+								<type>input</type>
+								<size>50</size>
+								<eval>trim</eval>
+							</config>
+						</TCEforms>
+					</settings.meta.INSTITUTION>
+
+				</el>
+			</ROOT>
+		</sDEF>
+	</sheets>
+</T3DataStructure> 

@@ -1,0 +1,21 @@
+{namespace b = ADWLM\Beaconizer\ViewHelpers}<b:LineFormatter>
+#PREFIX: <f:if condition="{settings.meta.PREFIX}"><f:then>{settings.meta.PREFIX}</f:then><f:else>http://d-nb.info/gnd/</f:else></f:if>
+#TARGET: {settings.meta.TARGET}
+<f:if condition="{settings.meta.RELATION}">#RELATION: {settings.meta.RELATION}</f:if>
+<f:if condition="{settings.meta.MESSAGE}">#MESSAGE: {settings.meta.MESSAGE}</f:if>
+<f:if condition="{settings.meta.ANNOTATION}">#ANNOTATION: {settings.meta.ANNOTATION}</f:if>
+<f:if condition="{settings.meta.DESCRIPTION}">#DESCRIPTION: {settings.meta.DESCRIPTION}</f:if>
+<f:if condition="{settings.meta.CREATOR}">#CREATOR: {settings.meta.CREATOR}</f:if>
+<f:if condition="{settings.meta.CONTACT}">#CONTACT: {settings.meta.CONTACT}</f:if>
+<f:if condition="{settings.meta.HOMEPAGE}">#HOMEPAGE: {settings.meta.HOMEPAGE}</f:if>
+<f:if condition="{settings.meta.FEED}">#FEED: {settings.meta.FEED}</f:if>
+<f:if condition="{settings.meta.TIMESTAMP}">#TIMESTAMP: <f:format.date format="c">@{settings.meta.TIMESTAMP}</f:format.date></f:if>
+<f:if condition="{settings.meta.UPDATE}">#UPDATE: {settings.meta.UPDATE}</f:if>
+<f:if condition="{settings.meta.SOURCESET}">#SOURCESET: {settings.meta.SOURCESET}</f:if>
+<f:if condition="{settings.meta.TARGETSET}">#TARGETSET: {settings.meta.TARGETSET}</f:if>
+<f:if condition="{settings.meta.NAME}">#NAME: {settings.meta.NAME}</f:if>
+<f:if condition="{settings.meta.INSTITUTION}">#INSTITUTION: {settings.meta.INSTITUTION}</f:if>
+<f:for each="{links}" as="link">
+<f:if condition="{link.sourceIdentifier}">{link.sourceIdentifier}</f:if>
+</f:for>
+</b:LineFormatter>

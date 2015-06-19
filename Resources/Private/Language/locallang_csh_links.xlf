@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2015-06-16T06:13:12Z" product-name="beaconizer">
+		<header/>
+		<body>
+			<trans-unit id="provider.description" xml:space="preserve">
+				<source>The provider from which this link was harvested</source>
+			</trans-unit>
+			<trans-unit id="source_identifier.description" xml:space="preserve">
+				<source>A mandatory source token</source>
+			</trans-unit>
+			<trans-unit id="annotation.description" xml:space="preserve">
+				<source>An optional annotation token </source>
+			</trans-unit>
+			<trans-unit id="target_identifier.description" xml:space="preserve">
+				<source>An optional target token</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

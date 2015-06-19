@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>database</type>
+		<description>Language labels for database tables/fields belonging to extension 'shakespearealbum'</description>
+	</meta>
+	<data type="array">
+
+		<languageKey index="default" type="array">
+
+			<label index="plugin.sheet.general">General Settings</label>
+			<label index="plugin.seeAlso.providers">Providers for lookup (no selection: all)</label>
+			<label index="plugin.seeAlso.mode">Mode</label>
+			<label index="plugin.seeAlso.mode.I.1">Lookup in database (harvested links via scheduler)</label>
+			<label index="plugin.seeAlso.mode.I.2">Lookup in beacon.findbuch.de (webservice)</label>
+
+			<label index="tx_beaconizer_harvestingTask.title">BEACON Harvesting Job</label>
+			<label index="tx_beaconizer_harvestingTask.description">Harvests links from selected BEACON providers</label>
+			<label index="tx_beaconizer_harvestingTask.providersToHarvest">Harvest links from this BEACON providers</label>
+			<label index="tx_beaconizer_harvestingTask.forceHarvesting">Force harvesting</label>
+			<label index="tx_beaconizer_harvestingTask.totalPerRun">Number of links per provider per run</label>
+			<label index="tx_beaconizer_harvestingTask.importOnPid">PID for harvesting (Empty: PID of provider)</label>
+			<label index="tx_beaconizer_harvestingTask.invalidProviderSelection">You must select some BEACON provider to harvest links</label>
+			<label index="tx_beaconizer_harvestingTask.invalidProviderUid">A selected provider is not valid</label>
+
+			<label index="tx_beaconizer_domain_model_providers">BEACON Provider</label>
+			<label index="tx_beaconizer_domain_model_providers.div1">Provider information</label>
+			<label index="tx_beaconizer_domain_model_providers.div2">Metadata from file</label>
+			<label index="tx_beaconizer_domain_model_providers.title">Title of Provider</label>
+			<label index="tx_beaconizer_domain_model_providers.link_pattern">Target pattern (for filtering with beacon.findbuch.de)</label>
+			<label index="tx_beaconizer_domain_model_providers.prefix">PREFIX</label>
+			<label index="tx_beaconizer_domain_model_providers.target">TARGET</label>
+			<label index="tx_beaconizer_domain_model_providers.relation">RELATION</label>
+			<label index="tx_beaconizer_domain_model_providers.message">MESSAGE</label>
+			<label index="tx_beaconizer_domain_model_providers.annotation">ANNOTATION</label>
+			<label index="tx_beaconizer_domain_model_providers.description">DESCRIPTION</label>
+			<label index="tx_beaconizer_domain_model_providers.creator">CREATOR</label>
+			<label index="tx_beaconizer_domain_model_providers.contact">CONTACT</label>
+			<label index="tx_beaconizer_domain_model_providers.homepage">HOMEPAGE</label>
+			<label index="tx_beaconizer_domain_model_providers.feed">FEED</label>
+			<label index="tx_beaconizer_domain_model_providers.timestamp">TIMESTAMP</label>
+			<label index="tx_beaconizer_domain_model_providers.update_information">UPDATE</label>
+			<label index="tx_beaconizer_domain_model_providers.revisit">REVISIT</label>
+			<label index="tx_beaconizer_domain_model_providers.sourceset">SOURCESET</label>
+			<label index="tx_beaconizer_domain_model_providers.targetset">TARGETSET</label>
+			<label index="tx_beaconizer_domain_model_providers.name">NAME</label>
+			<label index="tx_beaconizer_domain_model_providers.institution">INSTITUTION</label>
+			<label index="tx_beaconizer_domain_model_providers.harvesting_data">Harvesting information</label>
+			<label index="tx_beaconizer_domain_model_providers.harvesting_timestamp">Last harvested</label>
+
+			<label index="tx_beaconizer_domain_model_links">BEACON Links</label>
+			<label index="tx_beaconizer_domain_model_links.source_identifier">Source Identifier</label>
+			<label index="tx_beaconizer_domain_model_links.target_identifier">Target Identifier</label>
+			<label index="tx_beaconizer_domain_model_links.annotation">Annotation</label>
+			<label index="tx_beaconizer_domain_model_links.provider">BEACON Provider</label>
+
+		</languageKey>
+
+		<languageKey index="de" type="array">
+
+			<label index="plugin.sheet.general">Allgemeine Einstellungen</label>
+			<label index="plugin.seeAlso.providers">Provider für Abfrage (keine Auswahl: alle)</label>
+			<label index="plugin.seeAlso.mode">Funktionsweise</label>
+			<label index="plugin.seeAlso.mode.I.1">Datenbankabfrage (in allen mit dem Planer gesammelten Links)</label>
+			<label index="plugin.seeAlso.mode.I.2">Webservice Abfrage (gegen beacon.findbuch.de)</label>
+
+			<label index="tx_beaconizer_harvestingTask.title">BEACON Harvesting Job</label>
+			<label index="tx_beaconizer_harvestingTask.description">Importiert Links von den ausgewählten BEACON Providern</label>
+			<label index="tx_beaconizer_harvestingTask.providersToHarvest">Links von folgenden BEACON Providern importieren</label>
+			<label index="tx_beaconizer_harvestingTask.forceHarvesting">Import erzwingen</label>
+			<label index="tx_beaconizer_harvestingTask.totalPerRun">Anzahl Links pro Provider pro Durchlauf</label>
+			<label index="tx_beaconizer_harvestingTask.importOnPid">PID für Import (Leer: PID des Providers)</label>
+			<label index="tx_beaconizer_harvestingTask.invalidProviderSelection">Sie müssen einen BEACON Provider auswählen um Links zu importieren</label>
+			<label index="tx_beaconizer_harvestingTask.invalidProviderUid">Ein ausgewählter Provider ist nicht gültig</label>
+
+			<label index="tx_beaconizer_domain_model_providers">BEACON Provider</label>
+			<label index="tx_beaconizer_domain_model_providers.div1">Providerinformationen</label>
+			<label index="tx_beaconizer_domain_model_providers.div2">Metadaten aus Datei</label>
+			<label index="tx_beaconizer_domain_model_providers.title">Bezeichnung des Providers</label>
+			<label index="tx_beaconizer_domain_model_providers.link_pattern">Linkmuster (für Ergebnisfilterung bei beacon.findbuch.de)</label>
+			<label index="tx_beaconizer_domain_model_providers.prefix">PREFIX</label>
+			<label index="tx_beaconizer_domain_model_providers.target">TARGET</label>
+			<label index="tx_beaconizer_domain_model_providers.relation">RELATION</label>
+			<label index="tx_beaconizer_domain_model_providers.message">MESSAGE</label>
+			<label index="tx_beaconizer_domain_model_providers.annotation">ANNOTATION</label>
+			<label index="tx_beaconizer_domain_model_providers.description">DESCRIPTION</label>
+			<label index="tx_beaconizer_domain_model_providers.creator">CREATOR</label>
+			<label index="tx_beaconizer_domain_model_providers.contact">CONTACT</label>
+			<label index="tx_beaconizer_domain_model_providers.homepage">HOMEPAGE</label>
+			<label index="tx_beaconizer_domain_model_providers.feed">FEED</label>
+			<label index="tx_beaconizer_domain_model_providers.timestamp">TIMESTAMP</label>
+			<label index="tx_beaconizer_domain_model_providers.update_information">UPDATE</label>
+			<label index="tx_beaconizer_domain_model_providers.revisit">REVISIT</label>
+			<label index="tx_beaconizer_domain_model_providers.sourceset">SOURCESET</label>
+			<label index="tx_beaconizer_domain_model_providers.targetset">TARGETSET</label>
+			<label index="tx_beaconizer_domain_model_providers.name">NAME</label>
+			<label index="tx_beaconizer_domain_model_providers.institution">INSTITUTION</label>
+			<label index="tx_beaconizer_domain_model_providers.harvesting_data">Harvesting Informationen</label>
+			<label index="tx_beaconizer_domain_model_providers.harvesting_timestamp">Zuletzt geharvested</label>
+
+			<label index="tx_beaconizer_domain_model_links">BEACON Links</label>
+			<label index="tx_beaconizer_domain_model_links.source_identifier">Ausgangs-Identifikator</label>
+			<label index="tx_beaconizer_domain_model_links.target_identifier">Ziel-Identifikator</label>
+			<label index="tx_beaconizer_domain_model_links.annotation">Annotation</label>
+			<label index="tx_beaconizer_domain_model_links.provider">BEACON Provider</label>
+
+		</languageKey>
+	</data>
+</T3locallang>

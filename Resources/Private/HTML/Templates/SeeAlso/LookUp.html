@@ -1,0 +1,8 @@
+<f:if condition="{links}">
+	<p><strong><f:translate key="plugin.seeAlso" /></strong></p>
+	<ul>
+		<f:for each="{links}" as="link">
+			<li><f:link.external uri="{link.targetIdentifier}">{link.provider.title}</f:link.external></li>
+		</f:for>
+	</ul>
+</f:if>

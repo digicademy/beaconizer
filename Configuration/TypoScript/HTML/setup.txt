@@ -1,0 +1,19 @@
+plugin.tx_beaconizer {
+	view {
+		layoutRootPath = EXT:beaconizer/Resources/Private/HTML/Layouts/
+		partialRootPath = EXT:beaconizer/Resources/Private/HTML/Partials/
+		templateRootPath = EXT:beaconizer/Resources/Private/HTML/Templates/
+	}
+}
+
+plugin.tx_beaconizer_seealso {
+	settings {
+		objectMapping {
+#			VENDOR\Extension\Domain\Model\MyObject {
+#				pluginNamespace = tx_myextension_myplugin
+#				argumentName = myArgumentName
+#				sourceIdentifierProperty = myProperty
+#			}
+		}
+	}
+}

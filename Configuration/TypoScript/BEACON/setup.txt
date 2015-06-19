@@ -1,0 +1,66 @@
+plugin.tx_beaconizer_generator {
+	persistence {
+		classes {
+			ADWLM\Beaconizer\Domain\Model\GeneratedLinks {
+				mapping {
+#					tableName = MY_TYPO3_TABLE
+#					columns {
+#						MY_SOURCE_IDENTIFIER_FIELD.mapOnProperty = sourceIdentifier
+#					}
+				}
+			}
+		}
+	}
+}
+
+beacon = PAGE
+beacon {
+
+	typeNum = 1789
+
+	config {
+		disableAllHeaderCode = 1
+		additionalHeaders = Content-type:text/plain
+		admPanel = 0
+		xhtml_cleaning = 0
+		disablePrefixComment = 1
+		debug = 0
+	}
+
+	10 =< tt_content.list.20.beaconizer_generator
+}
+
+[globalVar = GP : type = 1789]
+
+plugin.tx_beaconizer_generator {
+	view {
+		layoutRootPath = EXT:beaconizer/Resources/Private/BEACON/Layouts/
+		partialRootPath = EXT:beaconizer/Resources/Private/BEACON/Partials/
+		templateRootPath = EXT:beaconizer/Resources/Private/BEACON/Templates/
+	}
+}
+
+# disable outer wraps for tt_content
+tt_content.stdWrap >
+lib.stdheader >
+
+[global]
+
+[globalVar = GP : tx_beaconizer_generator|plugin > 0]
+
+beacon.10 >
+beacon {
+	10 = RECORDS
+	10 {
+		source.data = GP:tx_beaconizer_generator|plugin
+		source.intval = 1
+		tables = tt_content
+		dontCheckPid = 1
+		conf.tt_content =< tt_content
+		stdWrap {
+			if.isTrue.data = GP:tx_beaconizer_generator|plugin
+			trim = 1
+		}
+	}
+}
+[global]

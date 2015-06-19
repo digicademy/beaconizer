@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2015-06-16T06:13:12Z" product-name="beaconizer">
+		<header/>
+		<body>
+			<trans-unit id="title.description" xml:space="preserve">
+				<source>Name of the BEACON file provider</source>
+			</trans-unit>
+			<trans-unit id="link_pattern.description" xml:space="preserve">
+				<source>A pattern that can be used with the seeAlso plugin to filter out links from this provider retrieved from the beacon.findbuch.de webservice. Just enter the start of the links (for example the domain name) for this provider. This will be string compared against the links from the webservice response and if there is a match, the links will be included.</source>
+			</trans-unit>
+			<trans-unit id="prefix.description" xml:space="preserve">
+				<source>The PREFIX meta field specifies an URI patter to construct sources identfiers. If this field is not specified or set to the empty string, the default value {+ID} is used. If the field value contains no template expression, the expression {ID} is appended. The name PREFIX was choosen to keep backwards compatibility with existing BEACON files.</source>
+			</trans-unit>
+			<trans-unit id="target.description" xml:space="preserve">
+				<source>The TARGET meta field specifies an URI patter to construct target identifiers. If this field is not specified or set to the empty string, the default value {+ID} is used. If the field value field contains no template expression, the expression {ID} is appended.</source>
+			</trans-unit>
+			<trans-unit id="relation.description" xml:space="preserve">
+				<source>All links in a link dump share a common relation type, specified by the RELATION meta field. The default relation type is rdfs:seeAlso, but application not interested in mapping to RDF can ignore this meta field. A relation type MUST be either an URI or a registered link type from the IANA link relations registry [RFC5988].</source>
+			</trans-unit>
+			<trans-unit id="message.description" xml:space="preserve">
+				<source>The MESSAGE meta field is used to specify a default value for link annotations. </source>
+			</trans-unit>
+			<trans-unit id="annotation.description" xml:space="preserve">
+				<source>The ANNOTATION field can be used to specify a specific the meaning of link annotations in a link dump. The field value MUST be an URI.</source>
+			</trans-unit>
+			<trans-unit id="description.description" xml:space="preserve">
+				<source>The DESCRIPTION meta field contains a human readable description of the link dump.</source>
+			</trans-unit>
+			<trans-unit id="creator.description" xml:space="preserve">
+				<source>The CREATOR meta field contains the URI or the name of the person, organization, or a service primarily responsible for making the link dump. The field SHOULD NOT contain a simple URL, unless this URL is also used as URI.</source>
+			</trans-unit>
+			<trans-unit id="contact.description" xml:space="preserve">
+				<source>The CONTACT meta field contains an email address or similar contact information to reach the creator of the link dump. The field value SHOULD be a mailbox address as specified in section 3.4 of [RFC5322].</source>
+			</trans-unit>
+			<trans-unit id="homepage.description" xml:space="preserve">
+				<source>The HOMEPAGE meta field contains an URL of a website with additional information about this link dump. Note that this field does not specify the homepage of the target dataset.</source>
+			</trans-unit>
+			<trans-unit id="feed.description" xml:space="preserve">
+				<source>The FEED meta field contains an URL, where to download the link dump from.</source>
+			</trans-unit>
+			<trans-unit id="timestamp.description" xml:space="preserve">
+				<source>The TIMESTAMP field contains the date of last modification of the link dump. Note that this value MAY be different to the last modification time of a BEACON file that serializes the link dump. The timestamp value MUST conform to the full-date or to the date-time production rule in [RFC3339]. In addition, an uppercase T character MUST be used to separate date and time, and an uppercase Z character MUST be present in the absence of a numeric time zone offset.</source>
+			</trans-unit>
+			<trans-unit id="update_information.description" xml:space="preserve">
+				<source>The UPDATE field specifies how frequently the link dump is likely to change. The field corresponds to the &lt;changefreq&gt; element in Sitemaps XML format. Valid values are: always | hourly | daily | weekly | monthly | yearly | never. The value "always" SHOULD be used to describe link dumps that change each time they are accessed. The value "never" SHOULD be used to describe archived link dumps. Please note that the value of this tag is considered a hint and not a command.</source>
+			</trans-unit>
+			<trans-unit id="revisit.description" xml:space="preserve">
+				<source>The REVISIT field is supported for backwards compatibility but is not in the official BEACON RFC.</source>
+			</trans-unit>
+			<trans-unit id="sourceset.descriptiont" xml:space="preserve">
+				<source>The source dataset can be identified by the SOURCESET meta field, which MUST be an URI if given.</source>
+			</trans-unit>
+			<trans-unit id="targetset.description" xml:space="preserve">
+				<source>The target dataset can be identified by the TARGETSET meta field, which MUST be an URI if given.</source>
+			</trans-unit>
+			<trans-unit id="name.description" xml:space="preserve">
+				<source>The NAME meta field contains a name or title of the target dataset.</source>
+			</trans-unit>
+			<trans-unit id="institution.description" xml:space="preserve">
+				<source>The INSTITUTION meta field contains the name or HTTP URI of the organization or of an individual responsible for making available the target dataset.</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>
