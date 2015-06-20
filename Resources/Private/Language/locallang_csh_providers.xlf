@@ -45,9 +45,6 @@
 			<trans-unit id="update_information.description" xml:space="preserve">
 				<source>The UPDATE field specifies how frequently the link dump is likely to change. The field corresponds to the &lt;changefreq&gt; element in Sitemaps XML format. Valid values are: always | hourly | daily | weekly | monthly | yearly | never. The value "always" SHOULD be used to describe link dumps that change each time they are accessed. The value "never" SHOULD be used to describe archived link dumps. Please note that the value of this tag is considered a hint and not a command.</source>
 			</trans-unit>
-			<trans-unit id="revisit.description" xml:space="preserve">
-				<source>The REVISIT field is supported for backwards compatibility but is not in the official BEACON RFC.</source>
-			</trans-unit>
 			<trans-unit id="sourceset.descriptiont" xml:space="preserve">
 				<source>The source dataset can be identified by the SOURCESET meta field, which MUST be an URI if given.</source>
 			</trans-unit>

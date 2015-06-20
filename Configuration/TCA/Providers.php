@@ -22,7 +22,6 @@ $TCA['tx_beaconizer_domain_model_providers'] = array(
 			feed,
 			timestamp,
 			update_information,
-			revisit,
 			sourceset,
 			targetset,
 			name,
@@ -52,7 +51,6 @@ $TCA['tx_beaconizer_domain_model_providers'] = array(
 				homepage,
 				timestamp,
 				update_information,
-				revisit,
 				sourceset,
 				targetset,
 				name,
@@ -202,13 +200,6 @@ $TCA['tx_beaconizer_domain_model_providers'] = array(
 				'type' => 'none',
 			),
 		),
-		'revisit' => array(
-			'exclude' => 0,
-			'label' => 'LLL:EXT:beaconizer/Resources/Private/Language/locallang_db.xml:tx_beaconizer_domain_model_providers.revisit',
-			'config' => array(
-				'type' => 'none',
-			),
-		),
 		'harvesting_data' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:beaconizer/Resources/Private/Language/locallang_db.xml:tx_beaconizer_domain_model_providers.harvesting_data',
@@ -225,6 +216,17 @@ $TCA['tx_beaconizer_domain_model_providers'] = array(
 				'type' => 'input',
 				'size' => 50,
 				'eval' => 'trim'
+			),
+		),
+			// supported legacy tags for reharvesting determination
+		'date' => array(
+			'config' => array(
+				'type' => 'passthrough',
+			),
+		),
+		'revisit' => array(
+			'config' => array(
+				'type' => 'passthrough',
 			),
 		),
 	),

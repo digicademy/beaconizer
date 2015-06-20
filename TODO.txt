@@ -1,13 +1,3 @@
-## NEXT ##
-
-* think about a logic in task that puts #DATE and #REVISIT tags into #TIMESTAMP as long as there is no #TIMESTAMP
-=> #REVISIT takes precedence over #DATE
-=> drop REVISIT field
-
-* what about this: http://www.historische-kommission-muenchen-editionen.de/beacon_adr.txt?
-=> import task should check: if no alternative target but only a-zA-Z, append this to annotation field and nevertheless create target
-=> use isValidURL for alternativeTarget
-
 ## IDEAS / POSSIBLE FEATURES ##
 
 * Scheduler task

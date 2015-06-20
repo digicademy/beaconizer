@@ -131,13 +131,6 @@ class Providers extends AbstractEntity {
 	protected $updateInformation;
 
 	/**
-	 * Revisit
-	 *
-	 * @var string $revisit
-	 */
-	protected $revisit;
-
-	/**
 	 * Sourceset
 	 *
 	 * @var string $sourceset
@@ -451,25 +444,6 @@ class Providers extends AbstractEntity {
 	 */
 	public function setUpdateInformation($updateInformation) {
 		$this->updateInformation = $updateInformation;
-	}
-
-	/**
-	 * Returns the revisit
-	 *
-	 * @return string
-	 */
-	public function getRevisit() {
-		return $this->revisit;
-	}
-
-	/**
-	 * Sets the revisit
-	 *
-	 * @param string $revisit
-	 * @return void
-	 */
-	public function setRevisit($revisit) {
-		$this->revisit = $revisit;
 	}
 
 	/**

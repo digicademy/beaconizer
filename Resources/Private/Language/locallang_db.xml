@@ -40,7 +40,6 @@
 			<label index="tx_beaconizer_domain_model_providers.feed">FEED</label>
 			<label index="tx_beaconizer_domain_model_providers.timestamp">TIMESTAMP</label>
 			<label index="tx_beaconizer_domain_model_providers.update_information">UPDATE</label>
-			<label index="tx_beaconizer_domain_model_providers.revisit">REVISIT</label>
 			<label index="tx_beaconizer_domain_model_providers.sourceset">SOURCESET</label>
 			<label index="tx_beaconizer_domain_model_providers.targetset">TARGETSET</label>
 			<label index="tx_beaconizer_domain_model_providers.name">NAME</label>
@@ -90,7 +89,6 @@
 			<label index="tx_beaconizer_domain_model_providers.feed">FEED</label>
 			<label index="tx_beaconizer_domain_model_providers.timestamp">TIMESTAMP</label>
 			<label index="tx_beaconizer_domain_model_providers.update_information">UPDATE</label>
-			<label index="tx_beaconizer_domain_model_providers.revisit">REVISIT</label>
 			<label index="tx_beaconizer_domain_model_providers.sourceset">SOURCESET</label>
 			<label index="tx_beaconizer_domain_model_providers.targetset">TARGETSET</label>
 			<label index="tx_beaconizer_domain_model_providers.name">NAME</label>

@@ -96,6 +96,8 @@ class HarvestingTask extends AbstractTask {
 				($harvestingData['linePointer'] > 0) ? $l = $harvestingData['linePointer'] : $l = 0;
 				$i = 0;
 				$rowsToInsert = array();
+				$wrongNumberOfSegments = FALSE;
+				$incorrectDataInLines = FALSE;
 
 				if (is_object($file)) {
 						// seek pointer in file if set
@@ -134,8 +136,7 @@ class HarvestingTask extends AbstractTask {
 							if (substr($line, 0, 9) == '#CONTACT:') $fieldsValues['contact'] = trim(substr($line, 9));
 								// #HOMEPAGE:
 							if (substr($line, 0, 10) == '#HOMEPAGE:') $fieldsValues['homepage'] = trim(substr($line, 10));
-								// #FEED:
-//							if (substr($line, 0, 6) == '#FEED:') $fieldsValues['feed'] = trim(substr($line, 6));
+								// #FEED: is not parsed because it is set manually in the TYPO3 backend
 								// #TIMESTAMP:
 							if (substr($line, 0, 11) == '#TIMESTAMP:') $fieldsValues['timestamp'] = trim(substr($line, 11));
 								// #UPDATE:
@@ -150,6 +151,11 @@ class HarvestingTask extends AbstractTask {
 							if (substr($line, 0, 6) == '#NAME:') $fieldsValues['name'] = trim(substr($line, 6));
 								// #INSTITUTION:
 							if (substr($line, 0, 13) == '#INSTITUTION:') $fieldsValues['institution'] = trim(substr($line, 13));
+								// supported legacy tags for better reharvesting determination
+								// #DATE:
+							if (substr($line, 0, 6) == '#DATE:') $fieldsValues['date'] = trim(substr($line, 6));
+								// #REVISIT:
+							if (substr($line, 0, 9) == '#REVISIT:') $fieldsValues['revisit'] = trim(substr($line, 9));
 						}
 
 							// if in the middle of a file set target from provider record (which btw. keeps it for next runs)
@@ -160,52 +166,91 @@ class HarvestingTask extends AbstractTask {
 
 								// get data segments
 							$data = GeneralUtility::trimExplode('|', $line);
-							if (count($data) < 1 && count($data) > 3) continue;
+							if (count($data) < 1 && count($data) > 3) {
+								$wrongNumberOfSegments = TRUE;
+								continue;
+							}
 
 								// process data segments
+								// rules for construction @see: http://gbv.github.io/beaconspec/beacon.html#link-construction
 							$linkValues = array();
-							$valid = TRUE;
-								// segment 1 - source_identifier
-							(preg_match('/^[a-zA-Z0-9]+$/', $data[0])) ? $linkValues['source_identifier'] = $data[0] : $valid = FALSE;
-								// special case: segment 2 contains alternative link, no segment 3 given
-							if (count($data) == 2 && GeneralUtility::isFirstPartOfStr($data[1], 'http://')) {
-								$linkValues['annotation'] = '';
-								$linkValues['target_identifier'] = $data[1];
+							$validSourceIdentifier = TRUE;
+
+								// segment 1 - always set source_identifier; mandatory
+							(preg_match('/^[a-zA-Z0-9]+$/', $data[0])) ? $linkValues['source_identifier'] = $data[0] : $validSourceIdentifier = FALSE;
+
+								// one data segment (source identifier) given, construct the target identifier from #TARGET + source identifier
+							if (count($data) == 1 && $validSourceIdentifier == TRUE && $fieldsValues['target']) {
+								($fieldsValues['message']) ? $linkValues['annotation'] = $fieldsValues['message'] : $linkValues['annotation'] = '';
+								$linkValues['target_identifier'] = str_replace('{ID}', $linkValues['source_identifier'], $fieldsValues['target']);
+								// two data segments given; segment two might contain a full target identifier starting with http:|https:
+							} elseif (count($data) == 2 && $validSourceIdentifier == TRUE) {
+								if (GeneralUtility::isValidUrl($data[1])) {
+									($fieldsValues['message']) ? $linkValues['annotation'] = $fieldsValues['message'] : $linkValues['annotation'] = '';
+									$linkValues['target_identifier'] = $data[1];
+								} else {
+									$linkValues['annotation'] = $data[1];
+									$linkValues['target_identifier'] = str_replace('{ID}', $linkValues['source_identifier'], $fieldsValues['target']);
+								}
+								// three data segments given
 							} else {
-									// segment 2 - annotation
-//								(preg_match('/^[0-9]+$/', $data[1])) ? $linkValues['number_of_resources'] = (int) $data[1] : $linkValues['description'] = $data[1];
+									// in this case segment 2 is always used as annotation
 								$linkValues['annotation'] = $data[1];
-									// prevent ending up with NULL as link annotation
-								if ($linkValues['annotation'] === NULL) $linkValues['annotation'] = '';
-									// segment 3 - alternative target
-								($data[2] && $valid == TRUE) ? $linkValues['target_identifier'] = $data[2] : $linkValues['target_identifier'] = str_replace('{ID}', $linkValues['source_identifier'], $fieldsValues['target']);
+
+									// full URL in third segment
+								if (GeneralUtility::isValidUrl($data[2])) {
+									$linkValues['target_identifier'] = $data[2];
+									// support for legacy format: source identifier | count | annotation; @example: http://www.historische-kommission-muenchen-editionen.de/beacon_adr.txt
+								} elseif ((int) $data[1] > 0 && GeneralUtility::isValidUrl($data[2]) === FALSE && $fieldsValues['target']) {
+									$linkValues['target_identifier'] = str_replace('{ID}', $linkValues['source_identifier'], $fieldsValues['target']);
+									$linkValues['annotation'] .= '|' . $data[2];
+									// only identifier in third segment, construct target identifier from #TARGET + source identifier
+								} elseif ($data[2] && $fieldsValues['target']) {
+									$constructedTargetIdentifier = str_replace('{ID}', $data[2], $fieldsValues['target']);
+									if (GeneralUtility::isValidUrl($constructedTargetIdentifier)) {
+										$linkValues['target_identifier'] = $constructedTargetIdentifier;
+									} else {
+										($linkValues['annotation']) ? $linkValues['annotation'] .= '|' . $data[2] : $linkValues['annotation'] = $data[2];
+									}
+								} else {
+									($linkValues['annotation']) ? $linkValues['annotation'] .= '|' . $data[2] : $linkValues['annotation'] = $data[2];
+								}
+
+									// set standard value for annotation if not set up to this point
+								if ($linkValues['annotation'] == '' && $fieldsValues['message']) {
+									$linkValues['annotation'] = $fieldsValues['message'];
+								}
 							}
 
-								// log if corrupt line
-							if (!$fieldsValues['target'] && !$data[2]) {
-								$GLOBALS['BE_USER']->simplelog('BEACON file from provider '. htmlspecialchars($currentProvider['title']) . ' contains no TARGET and no alternative links in some lines', $extKey='beaconizer', 2);
-							}
-
-								// if processing was valid (based on source_identifier) prepare record for import, else skip this line
-							if ($valid && is_array($linkValues) && ($fieldsValues['target'] || $data[2])) {
+								// if processing of line was valid (based on source identifier and target identifier) prepare record for import, else skip this line
+							if ($validSourceIdentifier === TRUE && GeneralUtility::isValidUrl($linkValues['target_identifier'])) {
 								$linkValues['provider'] = (int) $uid;
 								$linkValues['tstamp'] = time();
 								$linkValues['crdate'] = time();
 								$linkValues['pid'] = 0;
 								$linkValues['hidden'] = 1;
-									// collect new link record for later batch insertion
+									// collect new link record for later bulk insertion
 								$rowsToInsert[] = $linkValues;
-							} else { continue; }
+							} else {
+								$incorrectDataInLines = TRUE;
+								continue;
+							}
 
 								// raise import count
 							$i++;
+						} else {
+							$incorrectDataInLines = TRUE;
 						}
 							// raise line count
 						$l++;
 					}
 				}
 
-					// insert new records in a batch (values will be escaped internally)
+					// some logging if corrupt lines were in the file
+				if ($wrongNumberOfSegments === TRUE) $GLOBALS['BE_USER']->simplelog('BEACON file from provider '. htmlspecialchars($currentProvider['title']) . ' contains some lines with wrong number of data segments that were skipped', $extKey='beaconizer', 2);
+				if ($incorrectDataInLines === TRUE) $GLOBALS['BE_USER']->simplelog('BEACON file from provider '. htmlspecialchars($currentProvider['title']) . ' contains some lines with incorrect data that were skipped', $extKey='beaconizer', 2);
+
+				// insert new records in a batch (values will be escaped internally)
 				if (count($rowsToInsert) > 0) $GLOBALS['TYPO3_DB']->exec_INSERTmultipleRows(
 					'tx_beaconizer_domain_model_links',
 					array('source_identifier', 'annotation', 'target_identifier', 'provider', 'tstamp', 'crdate', 'pid', 'hidden'),
@@ -247,14 +292,14 @@ class HarvestingTask extends AbstractTask {
 						'creator' => '',
 						'contact' => '',
 						'homepage' => '',
-//						'feed' => '',
 						'timestamp' => '',
 						'update_information' => '',
-						'revisit' => '',
 						'sourceset' => '',
 						'targetset' => '',
 						'name' => '',
 						'institution' => '',
+						'date' => '',
+						'revisit' => '',
 					);
 					ArrayUtility::mergeRecursiveWithOverrule($cleanMetadata, $fieldsValues);
 					$fieldsValues = $cleanMetadata;
@@ -287,8 +332,10 @@ class HarvestingTask extends AbstractTask {
 	}
 
 	/**
-	 * Determines if a file should be harvested by comparing TIMESTAMP/UPDATE data of the current
-	 * provider record and the current BEACON file
+	 * Determines if a file should be harvested by comparing TIMESTAMP or UPDATE data of the current
+	 * provider record and the current BEACON file. The two legacy fields DATE and REVISIT are also
+	 * supported since they are still used a lot and help to determine if a file should be harvested
+	 * again.
 	 *
 	 * @param string $beaconFileContent
 	 * @param array $provider
@@ -298,15 +345,20 @@ class HarvestingTask extends AbstractTask {
 	private function shouldFileBeHarvested($beaconFileContent, $provider) {
 
 		$result = FALSE;
+		$metadataTagMatches = array();
 
 			// if file carries a timestamp, always take this as basis for comparison
 		preg_match('/^(#TIMESTAMP:)(.*?)$/m', $beaconFileContent, $timestampMatches);
 			// if timestamp in file is newer than timestamp in provider record, harvest
-		if (strftime(trim($provider['timestamp'])) < strftime(trim($timestampMatches[2]))) $result = TRUE;
+		if (strftime(trim($provider['timestamp'])) < strftime(trim($timestampMatches[2]))) {
+			$result = TRUE;
+			$metadataTagMatches['timestamp'] = $timestampMatches[2];
+		}
 
 			// if no timestamp could be retrieved, check if file has UPDATE metadata information
 		preg_match('/^(#UPDATE:)(.*?)$/m', $beaconFileContent, $updateMatches);
 		if ($result === FALSE && is_array($updateMatches)) {
+			$metadataTagMatches['update'] = $updateMatches[2];
 				// get the time difference between now and the (last) harvesting timestamp
 			$timeDifference = time() - (int) $provider['harvesting_timestamp'];
 			switch (trim($updateMatches[2])) {
@@ -335,9 +387,25 @@ class HarvestingTask extends AbstractTask {
 			}
 		}
 
-			// if none of the two metadata fields exist in the current file, do nothing
-			// in such a case, a regular time interval for forced harvesting can be set in the scheduler
-		// if ($result === FALSE && (!$timestampMatches || !$updateMatches)) $result = TRUE;
+			// if legacy date tag is newer than date tag in provider record, harvest
+		preg_match('/^(#DATE:)(.*?)$/m', $beaconFileContent, $dateMatches);
+		if ($result === FALSE && is_array($dateMatches) && strftime(trim($provider['date'])) < strftime(trim($dateMatches[2]))) {
+			$result = TRUE;
+			$metadataTagMatches['date'] = $dateMatches[2];
+		}
+			/*
+			 * if legacy revisit tag is newer than revisit tag in provider record, harvest; revisit just treated as another timestamp and not in the sense of a
+			 * 'the time now is past revisit time, please harvested' mechanism since it is very often not updated in older BEACON files which
+			 * would result in the file always being harvested
+			 */
+		preg_match('/^(#REVISIT:)(.*?)$/m', $beaconFileContent, $revisitMatches);
+		if ($result === FALSE && is_array($revisitMatches) && strftime(trim($provider['revisit'])) < strftime(trim($revisitMatches[2]))) {
+			$result = TRUE;
+			$metadataTagMatches['revisit'] = $revisitMatches[2];
+		}
+
+			// if none of the four date/time base metadata tags could be found, reharvesting cannot be determined
+		if (empty($metadataTagMatches)) $GLOBALS['BE_USER']->simplelog('Neither a timestamp, an update, date or revisit field could be found in file from provider ' . htmlspecialchars($provider['title']) . '. Harvesting cannot be determined', $extKey='beaconizer', 0);
 
 		return $result;
 	}
