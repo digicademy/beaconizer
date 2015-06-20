@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2015-06-20T14:01:44Z" product-name="beaconizer">
+		<header/>
+		<body>
+			<trans-unit id="plugin.sheet.general" xml:space="preserve">
+				<source>General Settings</source>
+			</trans-unit>
+			<trans-unit id="plugin.seeAlso.providers" xml:space="preserve">
+				<source>Providers for lookup (no selection: all)</source>
+			</trans-unit>
+			<trans-unit id="plugin.seeAlso.mode" xml:space="preserve">
+				<source>Mode</source>
+			</trans-unit>
+			<trans-unit id="plugin.seeAlso.mode.I.1" xml:space="preserve">
+				<source>Lookup in database (harvested links via scheduler)</source>
+			</trans-unit>
+			<trans-unit id="plugin.seeAlso.mode.I.2" xml:space="preserve">
+				<source>Lookup in beacon.findbuch.de (webservice)</source>
+			</trans-unit>
+			<trans-unit id="tx_beaconizer_harvestingTask.title" xml:space="preserve">
+				<source>BEACON Harvesting Job</source>
+			</trans-unit>
+			<trans-unit id="tx_beaconizer_harvestingTask.description" xml:space="preserve">
+				<source>Harvests links from selected BEACON providers</source>
+			</trans-unit>
+			<trans-unit id="tx_beaconizer_harvestingTask.providersToHarvest" xml:space="preserve">
+				<source>Harvest links from this BEACON providers</source>
+			</trans-unit>
+			<trans-unit id="tx_beaconizer_harvestingTask.forceHarvesting" xml:space="preserve">
+				<source>Force harvesting</source>
+			</trans-unit>
+			<trans-unit id="tx_beaconizer_harvestingTask.totalPerRun" xml:space="preserve">
+				<source>Number of links per provider per run</source>
+			</trans-unit>
+			<trans-unit id="tx_beaconizer_harvestingTask.importOnPid" xml:space="preserve">
+				<source>PID for harvesting (Empty: PID of provider)</source>
+			</trans-unit>
+			<trans-unit id="tx_beaconizer_harvestingTask.invalidProviderSelection" xml:space="preserve">
+				<source>You must select some BEACON provider to harvest links</source>
+			</trans-unit>
+			<trans-unit id="tx_beaconizer_harvestingTask.invalidProviderUid" xml:space="preserve">
+				<source>A selected provider is not valid</source>
+			</trans-unit>
+			<trans-unit id="tx_beaconizer_domain_model_providers" xml:space="preserve">
+				<source>BEACON Provider</source>
+			</trans-unit>
+			<trans-unit id="tx_beaconizer_domain_model_providers.div1" xml:space="preserve">
+				<source>Provider information</source>
+			</trans-unit>
+			<trans-unit id="tx_beaconizer_domain_model_providers.div2" xml:space="preserve">
+				<source>Metadata from file</source>
+			</trans-unit>
+			<trans-unit id="tx_beaconizer_domain_model_providers.title" xml:space="preserve">
+				<source>Title of Provider</source>
+			</trans-unit>
+			<trans-unit id="tx_beaconizer_domain_model_providers.link_pattern" xml:space="preserve">
+				<source>Target pattern (for filtering with beacon.findbuch.de)</source>
+			</trans-unit>
+			<trans-unit id="tx_beaconizer_domain_model_providers.prefix" xml:space="preserve">
+				<source>PREFIX</source>
+			</trans-unit>
+			<trans-unit id="tx_beaconizer_domain_model_providers.target" xml:space="preserve">
+				<source>TARGET</source>
+			</trans-unit>
+			<trans-unit id="tx_beaconizer_domain_model_providers.relation" xml:space="preserve">
+				<source>RELATION</source>
+			</trans-unit>
+			<trans-unit id="tx_beaconizer_domain_model_providers.message" xml:space="preserve">
+				<source>MESSAGE</source>
+			</trans-unit>
+			<trans-unit id="tx_beaconizer_domain_model_providers.annotation" xml:space="preserve">
+				<source>ANNOTATION</source>
+			</trans-unit>
+			<trans-unit id="tx_beaconizer_domain_model_providers.description" xml:space="preserve">
+				<source>DESCRIPTION</source>
+			</trans-unit>
+			<trans-unit id="tx_beaconizer_domain_model_providers.creator" xml:space="preserve">
+				<source>CREATOR</source>
+			</trans-unit>
+			<trans-unit id="tx_beaconizer_domain_model_providers.contact" xml:space="preserve">
+				<source>CONTACT</source>
+			</trans-unit>
+			<trans-unit id="tx_beaconizer_domain_model_providers.homepage" xml:space="preserve">
+				<source>HOMEPAGE</source>
+			</trans-unit>
+			<trans-unit id="tx_beaconizer_domain_model_providers.feed" xml:space="preserve">
+				<source>FEED</source>
+			</trans-unit>
+			<trans-unit id="tx_beaconizer_domain_model_providers.timestamp" xml:space="preserve">
+				<source>TIMESTAMP</source>
+			</trans-unit>
+			<trans-unit id="tx_beaconizer_domain_model_providers.update_information" xml:space="preserve">
+				<source>UPDATE</source>
+			</trans-unit>
+			<trans-unit id="tx_beaconizer_domain_model_providers.sourceset" xml:space="preserve">
+				<source>SOURCESET</source>
+			</trans-unit>
+			<trans-unit id="tx_beaconizer_domain_model_providers.targetset" xml:space="preserve">
+				<source>TARGETSET</source>
+			</trans-unit>
+			<trans-unit id="tx_beaconizer_domain_model_providers.name" xml:space="preserve">
+				<source>NAME</source>
+			</trans-unit>
+			<trans-unit id="tx_beaconizer_domain_model_providers.institution" xml:space="preserve">
+				<source>INSTITUTION</source>
+			</trans-unit>
+			<trans-unit id="tx_beaconizer_domain_model_providers.harvesting_data" xml:space="preserve">
+				<source>Harvesting information</source>
+			</trans-unit>
+			<trans-unit id="tx_beaconizer_domain_model_providers.harvesting_timestamp" xml:space="preserve">
+				<source>Last harvested</source>
+			</trans-unit>
+			<trans-unit id="tx_beaconizer_domain_model_links" xml:space="preserve">
+				<source>BEACON Links</source>
+			</trans-unit>
+			<trans-unit id="tx_beaconizer_domain_model_links.source_identifier" xml:space="preserve">
+				<source>Source Identifier</source>
+			</trans-unit>
+			<trans-unit id="tx_beaconizer_domain_model_links.target_identifier" xml:space="preserve">
+				<source>Target Identifier</source>
+			</trans-unit>
+			<trans-unit id="tx_beaconizer_domain_model_links.annotation" xml:space="preserve">
+				<source>Annotation</source>
+			</trans-unit>
+			<trans-unit id="tx_beaconizer_domain_model_links.provider" xml:space="preserve">
+				<source>BEACON Provider</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

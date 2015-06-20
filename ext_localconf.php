@@ -27,8 +27,8 @@ if (!defined('TYPO3_MODE')) die('Access denied!');
 // register scheduler task
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['scheduler']['tasks']['ADWLM\\Beaconizer\\Task\\HarvestingTask'] = array(
 	'extension'			=> $_EXTKEY,
-	'title'				=> 'LLL:EXT:' . $_EXTKEY . '/Resources/Private/Language/locallang_db.xml:tx_beaconizer_harvestingTask.title',
-	'description'		=> 'LLL:EXT:' . $_EXTKEY . '/Resources/Private/Language/locallang_db.xml:tx_beaconizer_harvestingTask.description',
+	'title'				=> 'LLL:EXT:' . $_EXTKEY . '/Resources/Private/Language/locallang_db.xlf:tx_beaconizer_harvestingTask.title',
+	'description'		=> 'LLL:EXT:' . $_EXTKEY . '/Resources/Private/Language/locallang_db.xlf:tx_beaconizer_harvestingTask.description',
 	'additionalFields'	=> 'ADWLM\\Beaconizer\\Task\\AdditionalFieldProvider'
 );
 

@@ -3,23 +3,23 @@
 		<sDEF>
 			<ROOT>
 				<TCEforms>
-					<sheetTitle>LLL:EXT:beaconizer/Resources/Private/Language/locallang_db.xml:plugin.sheet.general</sheetTitle>
+					<sheetTitle>LLL:EXT:beaconizer/Resources/Private/Language/locallang_db.xlf:plugin.sheet.general</sheetTitle>
 				</TCEforms>
 				<type>array</type>
 				<el>
 
 					<settings.general.mode>
 						<TCEforms>
-							<label>LLL:EXT:beaconizer/Resources/Private/Language/locallang_db.xml:plugin.seeAlso.mode</label>
+							<label>LLL:EXT:beaconizer/Resources/Private/Language/locallang_db.xlf:plugin.seeAlso.mode</label>
 							<config>
 								<type>select</type>
 								<items type="array">
 									<numIndex index="10">
-										<numIndex index="0">LLL:EXT:beaconizer/Resources/Private/Language/locallang_db.xml:plugin.seeAlso.mode.I.1</numIndex>
+										<numIndex index="0">LLL:EXT:beaconizer/Resources/Private/Language/locallang_db.xlf:plugin.seeAlso.mode.I.1</numIndex>
 										<numIndex index="1">1</numIndex>
 									</numIndex>
 									<numIndex index="20">
-										<numIndex index="0">LLL:EXT:beaconizer/Resources/Private/Language/locallang_db.xml:plugin.seeAlso.mode.I.2</numIndex>
+										<numIndex index="0">LLL:EXT:beaconizer/Resources/Private/Language/locallang_db.xlf:plugin.seeAlso.mode.I.2</numIndex>
 										<numIndex index="1">2</numIndex>
 									</numIndex>
 								</items>
@@ -32,7 +32,7 @@
 
 					<settings.general.providers>
 						<TCEforms>
-							<label>LLL:EXT:beaconizer/Resources/Private/Language/locallang_db.xml:plugin.seeAlso.providers</label>
+							<label>LLL:EXT:beaconizer/Resources/Private/Language/locallang_db.xlf:plugin.seeAlso.providers</label>
 							<config>
 								<type>select</type>
 								<foreign_table>tx_beaconizer_domain_model_providers</foreign_table>

@@ -54,7 +54,7 @@ class AdditionalFieldProvider implements AdditionalFieldProviderInterface {
 		$fieldHtml = '<input name="' . $fieldName . '" id="'. $fieldId .'" '. $checked . ' class="checkboxes" type="checkbox" />';
 		$additionalFields[$fieldId] = array(
 			'code' => $fieldHtml,
-			'label' => 'LLL:EXT:beaconizer/Resources/Private/Language/locallang_db.xml:tx_beaconizer_harvestingTask.forceHarvesting',
+			'label' => 'LLL:EXT:beaconizer/Resources/Private/Language/locallang_db.xlf:tx_beaconizer_harvestingTask.forceHarvesting',
 			'cshKey' => '_MOD_tools_txschedulerM1',
 			'cshLabel' => $fieldId
 		);
@@ -73,7 +73,7 @@ class AdditionalFieldProvider implements AdditionalFieldProviderInterface {
 		$fieldHtml = '<input name="' . $fieldName . '" id="'. $fieldId .'" type="input" size="15" value="'. $totalPerRunValue .'" />';
 		$additionalFields[$fieldId] = array(
 			'code' => $fieldHtml,
-			'label' => 'LLL:EXT:beaconizer/Resources/Private/Language/locallang_db.xml:tx_beaconizer_harvestingTask.totalPerRun',
+			'label' => 'LLL:EXT:beaconizer/Resources/Private/Language/locallang_db.xlf:tx_beaconizer_harvestingTask.totalPerRun',
 			'cshKey' => '_MOD_tools_txschedulerM1',
 			'cshLabel' => $fieldId
 		);
@@ -92,7 +92,7 @@ class AdditionalFieldProvider implements AdditionalFieldProviderInterface {
 		$fieldHtml = '<input name="' . $fieldName . '" id="'. $fieldId .'" type="input" size="5" value="'. $importOnPid .'" />';
 		$additionalFields[$fieldId] = array(
 			'code' => $fieldHtml,
-			'label' => 'LLL:EXT:beaconizer/Resources/Private/Language/locallang_db.xml:tx_beaconizer_harvestingTask.importOnPid',
+			'label' => 'LLL:EXT:beaconizer/Resources/Private/Language/locallang_db.xlf:tx_beaconizer_harvestingTask.importOnPid',
 			'cshKey' => '_MOD_tools_txschedulerM1',
 			'cshLabel' => $fieldId
 		);
@@ -114,7 +114,7 @@ class AdditionalFieldProvider implements AdditionalFieldProviderInterface {
 		$fieldHtml = '<select name="' . $fieldName . '" id="' . $fieldId . '" class="wide" size="10" multiple="multiple">' . $fieldOptions . '</select>';
 		$additionalFields[$fieldId] = array(
 			'code' => $fieldHtml,
-			'label' => 'LLL:EXT:beaconizer/Resources/Private/Language/locallang_db.xml:tx_beaconizer_harvestingTask.providersToHarvest',
+			'label' => 'LLL:EXT:beaconizer/Resources/Private/Language/locallang_db.xlf:tx_beaconizer_harvestingTask.providersToHarvest',
 			'cshKey' => '_MOD_tools_txschedulerM1',
 			'cshLabel' => $fieldId
 		);
@@ -145,7 +145,7 @@ class AdditionalFieldProvider implements AdditionalFieldProviderInterface {
 		$submittedData['beaconizer_importOnPid'] = (int) $submittedData['beaconizer_importOnPid'];
 
 		if (!is_array($submittedData['beaconizer_providersToHarvest'])) {
-			$schedulerModule->addMessage($GLOBALS['LANG']->sL('LLL:EXT:beaconizer/Resources/Private/Language/locallang_db.xml:tx_beaconizer_harvestingTask.invalidProviderSelection'), FlashMessage::ERROR);
+			$schedulerModule->addMessage($GLOBALS['LANG']->sL('LLL:EXT:beaconizer/Resources/Private/Language/locallang_db.xlf:tx_beaconizer_harvestingTask.invalidProviderSelection'), FlashMessage::ERROR);
 			$result = FALSE;
 		} else {
 			$availableProviders = $this->getAvailableProviders();
@@ -154,7 +154,7 @@ class AdditionalFieldProvider implements AdditionalFieldProviderInterface {
 			}
 			foreach ($submittedData['beaconizer_providersToHarvest'] as $submittedProvider) {
 				if (!in_array($submittedProvider, $validProviderUids)) {
-					$schedulerModule->addMessage($GLOBALS['LANG']->sL('LLL:EXT:beaconizer/Resources/Private/Language/locallang_db.xml:tx_beaconizer_harvestingTask.invalidProviderUid'), FlashMessage::ERROR);
+					$schedulerModule->addMessage($GLOBALS['LANG']->sL('LLL:EXT:beaconizer/Resources/Private/Language/locallang_db.xlf:tx_beaconizer_harvestingTask.invalidProviderUid'), FlashMessage::ERROR);
 					$result = FALSE;
 				}
 			}

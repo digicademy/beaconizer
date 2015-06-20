@@ -3,14 +3,14 @@
 		<sDEF>
 			<ROOT>
 				<TCEforms>
-					<sheetTitle>LLL:EXT:beaconizer/Resources/Private/Language/locallang_db.xml:plugin.sheet.general</sheetTitle>
+					<sheetTitle>LLL:EXT:beaconizer/Resources/Private/Language/locallang_db.xlf:plugin.sheet.general</sheetTitle>
 				</TCEforms>
 				<type>array</type>
 				<el>
 
 					<settings.meta.PREFIX>
 						<TCEforms>
-							<label>LLL:EXT:beaconizer/Resources/Private/Language/locallang_db.xml:tx_beaconizer_domain_model_providers.prefix</label>
+							<label>LLL:EXT:beaconizer/Resources/Private/Language/locallang_db.xlf:tx_beaconizer_domain_model_providers.prefix</label>
 							<config>
 								<type>input</type>
 								<size>50</size>
@@ -22,7 +22,7 @@
 
 					<settings.meta.TARGET>
 						<TCEforms>
-							<label>LLL:EXT:beaconizer/Resources/Private/Language/locallang_db.xml:tx_beaconizer_domain_model_providers.target</label>
+							<label>LLL:EXT:beaconizer/Resources/Private/Language/locallang_db.xlf:tx_beaconizer_domain_model_providers.target</label>
 							<config>
 								<type>input</type>
 								<size>50</size>
@@ -34,7 +34,7 @@
 
 					<settings.meta.RELATION>
 						<TCEforms>
-							<label>LLL:EXT:beaconizer/Resources/Private/Language/locallang_db.xml:tx_beaconizer_domain_model_providers.relation</label>
+							<label>LLL:EXT:beaconizer/Resources/Private/Language/locallang_db.xlf:tx_beaconizer_domain_model_providers.relation</label>
 							<config>
 								<type>input</type>
 								<size>50</size>
@@ -46,7 +46,7 @@
 
 					<settings.meta.MESSAGE>
 						<TCEforms>
-							<label>LLL:EXT:beaconizer/Resources/Private/Language/locallang_db.xml:tx_beaconizer_domain_model_providers.message</label>
+							<label>LLL:EXT:beaconizer/Resources/Private/Language/locallang_db.xlf:tx_beaconizer_domain_model_providers.message</label>
 							<config>
 								<type>input</type>
 								<size>50</size>
@@ -57,7 +57,7 @@
 
 					<settings.meta.ANNOTATION>
 						<TCEforms>
-							<label>LLL:EXT:beaconizer/Resources/Private/Language/locallang_db.xml:tx_beaconizer_domain_model_providers.annotation</label>
+							<label>LLL:EXT:beaconizer/Resources/Private/Language/locallang_db.xlf:tx_beaconizer_domain_model_providers.annotation</label>
 							<config>
 								<type>input</type>
 								<size>50</size>
@@ -68,7 +68,7 @@
 
 					<settings.meta.DESCRIPTION>
 						<TCEforms>
-							<label>LLL:EXT:beaconizer/Resources/Private/Language/locallang_db.xml:tx_beaconizer_domain_model_providers.description</label>
+							<label>LLL:EXT:beaconizer/Resources/Private/Language/locallang_db.xlf:tx_beaconizer_domain_model_providers.description</label>
 							<config>
 								<type>input</type>
 								<size>50</size>
@@ -79,7 +79,7 @@
 
 					<settings.meta.CREATOR>
 						<TCEforms>
-							<label>LLL:EXT:beaconizer/Resources/Private/Language/locallang_db.xml:tx_beaconizer_domain_model_providers.creator</label>
+							<label>LLL:EXT:beaconizer/Resources/Private/Language/locallang_db.xlf:tx_beaconizer_domain_model_providers.creator</label>
 							<config>
 								<type>input</type>
 								<size>50</size>
@@ -90,7 +90,7 @@
 
 					<settings.meta.CONTACT>
 						<TCEforms>
-							<label>LLL:EXT:beaconizer/Resources/Private/Language/locallang_db.xml:tx_beaconizer_domain_model_providers.contact</label>
+							<label>LLL:EXT:beaconizer/Resources/Private/Language/locallang_db.xlf:tx_beaconizer_domain_model_providers.contact</label>
 							<config>
 								<type>input</type>
 								<size>50</size>
@@ -102,7 +102,7 @@
 
 					<settings.meta.HOMEPAGE>
 						<TCEforms>
-							<label>LLL:EXT:beaconizer/Resources/Private/Language/locallang_db.xml:tx_beaconizer_domain_model_providers.homepage</label>
+							<label>LLL:EXT:beaconizer/Resources/Private/Language/locallang_db.xlf:tx_beaconizer_domain_model_providers.homepage</label>
 							<config>
 								<type>input</type>
 								<size>50</size>
@@ -113,7 +113,7 @@
 
 					<settings.meta.FEED>
 						<TCEforms>
-							<label>LLL:EXT:beaconizer/Resources/Private/Language/locallang_db.xml:tx_beaconizer_domain_model_providers.feed</label>
+							<label>LLL:EXT:beaconizer/Resources/Private/Language/locallang_db.xlf:tx_beaconizer_domain_model_providers.feed</label>
 							<config>
 								<type>input</type>
 								<size>50</size>
@@ -125,7 +125,7 @@
 
 					<settings.meta.TIMESTAMP>
 						<TCEforms>
-							<label>LLL:EXT:beaconizer/Resources/Private/Language/locallang_db.xml:tx_beaconizer_domain_model_providers.timestamp</label>
+							<label>LLL:EXT:beaconizer/Resources/Private/Language/locallang_db.xlf:tx_beaconizer_domain_model_providers.timestamp</label>
 							<config>
 								<type>input</type>
 								<size>50</size>
@@ -136,7 +136,7 @@
 
 					<settings.meta.UPDATE>
 						<TCEforms>
-							<label>LLL:EXT:beaconizer/Resources/Private/Language/locallang_db.xml:tx_beaconizer_domain_model_providers.update_information</label>
+							<label>LLL:EXT:beaconizer/Resources/Private/Language/locallang_db.xlf:tx_beaconizer_domain_model_providers.update_information</label>
 							<config>
 								<type>select</type>
 								<items type="array">
@@ -179,7 +179,7 @@
 
 					<settings.meta.SOURCESET>
 						<TCEforms>
-							<label>LLL:EXT:beaconizer/Resources/Private/Language/locallang_db.xml:tx_beaconizer_domain_model_providers.sourceset</label>
+							<label>LLL:EXT:beaconizer/Resources/Private/Language/locallang_db.xlf:tx_beaconizer_domain_model_providers.sourceset</label>
 							<config>
 								<type>input</type>
 								<size>50</size>
@@ -190,7 +190,7 @@
 
 					<settings.meta.TARGETSET>
 						<TCEforms>
-							<label>LLL:EXT:beaconizer/Resources/Private/Language/locallang_db.xml:tx_beaconizer_domain_model_providers.targetset</label>
+							<label>LLL:EXT:beaconizer/Resources/Private/Language/locallang_db.xlf:tx_beaconizer_domain_model_providers.targetset</label>
 							<config>
 								<type>input</type>
 								<size>50</size>
@@ -201,7 +201,7 @@
 
 					<settings.meta.NAME>
 						<TCEforms>
-							<label>LLL:EXT:beaconizer/Resources/Private/Language/locallang_db.xml:tx_beaconizer_domain_model_providers.name</label>
+							<label>LLL:EXT:beaconizer/Resources/Private/Language/locallang_db.xlf:tx_beaconizer_domain_model_providers.name</label>
 							<config>
 								<type>input</type>
 								<size>50</size>
@@ -212,7 +212,7 @@
 
 					<settings.meta.INSTITUTION>
 						<TCEforms>
-							<label>LLL:EXT:beaconizer/Resources/Private/Language/locallang_db.xml:tx_beaconizer_domain_model_providers.institution</label>
+							<label>LLL:EXT:beaconizer/Resources/Private/Language/locallang_db.xlf:tx_beaconizer_domain_model_providers.institution</label>
 							<config>
 								<type>input</type>
 								<size>50</size>

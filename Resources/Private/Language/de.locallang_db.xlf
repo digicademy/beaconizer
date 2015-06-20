@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2015-06-20T14:01:44Z" product-name="beaconizer">
+		<header/>
+		<body>
+			<trans-unit id="plugin.sheet.general" xml:space="preserve" approved="yes">
+				<source>General Settings</source>
+				<target>Allgemeine Einstellungen</target>
+			</trans-unit>
+			<trans-unit id="plugin.seeAlso.providers" xml:space="preserve" approved="yes">
+				<source>Providers for lookup (no selection: all)</source>
+				<target>Provider für Abfrage (keine Auswahl: alle)</target>
+			</trans-unit>
+			<trans-unit id="plugin.seeAlso.mode" xml:space="preserve" approved="yes">
+				<source>Mode</source>
+				<target>Funktionsweise</target>
+			</trans-unit>
+			<trans-unit id="plugin.seeAlso.mode.I.1" xml:space="preserve" approved="yes">
+				<source>Lookup in database (harvested links via scheduler)</source>
+				<target>Datenbankabfrage (in allen mit dem Planer gesammelten Links)</target>
+			</trans-unit>
+			<trans-unit id="plugin.seeAlso.mode.I.2" xml:space="preserve" approved="yes">
+				<source>Lookup in beacon.findbuch.de (webservice)</source>
+				<target>Webservice Abfrage (gegen beacon.findbuch.de)</target>
+			</trans-unit>
+			<trans-unit id="tx_beaconizer_harvestingTask.title" xml:space="preserve" approved="yes">
+				<source>BEACON Harvesting Job</source>
+				<target>BEACON Harvesting Job</target>
+			</trans-unit>
+			<trans-unit id="tx_beaconizer_harvestingTask.description" xml:space="preserve" approved="yes">
+				<source>Harvests links from selected BEACON providers</source>
+				<target>Importiert Links von den ausgewählten BEACON Providern</target>
+			</trans-unit>
+			<trans-unit id="tx_beaconizer_harvestingTask.providersToHarvest" xml:space="preserve" approved="yes">
+				<source>Harvest links from this BEACON providers</source>
+				<target>Links von folgenden BEACON Providern importieren</target>
+			</trans-unit>
+			<trans-unit id="tx_beaconizer_harvestingTask.forceHarvesting" xml:space="preserve" approved="yes">
+				<source>Force harvesting</source>
+				<target>Import erzwingen</target>
+			</trans-unit>
+			<trans-unit id="tx_beaconizer_harvestingTask.totalPerRun" xml:space="preserve" approved="yes">
+				<source>Number of links per provider per run</source>
+				<target>Anzahl Links pro Provider pro Durchlauf</target>
+			</trans-unit>
+			<trans-unit id="tx_beaconizer_harvestingTask.importOnPid" xml:space="preserve" approved="yes">
+				<source>PID for harvesting (Empty: PID of provider)</source>
+				<target>PID für Import (Leer: PID des Providers)</target>
+			</trans-unit>
+			<trans-unit id="tx_beaconizer_harvestingTask.invalidProviderSelection" xml:space="preserve" approved="yes">
+				<source>You must select some BEACON provider to harvest links</source>
+				<target>Sie müssen einen BEACON Provider auswählen um Links zu importieren</target>
+			</trans-unit>
+			<trans-unit id="tx_beaconizer_harvestingTask.invalidProviderUid" xml:space="preserve" approved="yes">
+				<source>A selected provider is not valid</source>
+				<target>Ein ausgewählter Provider ist nicht gültig</target>
+			</trans-unit>
+			<trans-unit id="tx_beaconizer_domain_model_providers" xml:space="preserve" approved="yes">
+				<source>BEACON Provider</source>
+				<target>BEACON Provider</target>
+			</trans-unit>
+			<trans-unit id="tx_beaconizer_domain_model_providers.div1" xml:space="preserve" approved="yes">
+				<source>Provider information</source>
+				<target>Providerinformationen</target>
+			</trans-unit>
+			<trans-unit id="tx_beaconizer_domain_model_providers.div2" xml:space="preserve" approved="yes">
+				<source>Metadata from file</source>
+				<target>Metadaten aus Datei</target>
+			</trans-unit>
+			<trans-unit id="tx_beaconizer_domain_model_providers.title" xml:space="preserve" approved="yes">
+				<source>Title of Provider</source>
+				<target>Bezeichnung des Providers</target>
+			</trans-unit>
+			<trans-unit id="tx_beaconizer_domain_model_providers.link_pattern" xml:space="preserve" approved="yes">
+				<source>Target pattern (for filtering with beacon.findbuch.de)</source>
+				<target>Linkmuster (für Ergebnisfilterung bei beacon.findbuch.de)</target>
+			</trans-unit>
+			<trans-unit id="tx_beaconizer_domain_model_providers.prefix" xml:space="preserve" approved="yes">
+				<source>PREFIX</source>
+				<target>PREFIX</target>
+			</trans-unit>
+			<trans-unit id="tx_beaconizer_domain_model_providers.target" xml:space="preserve" approved="yes">
+				<source>TARGET</source>
+				<target>TARGET</target>
+			</trans-unit>
+			<trans-unit id="tx_beaconizer_domain_model_providers.relation" xml:space="preserve" approved="yes">
+				<source>RELATION</source>
+				<target>RELATION</target>
+			</trans-unit>
+			<trans-unit id="tx_beaconizer_domain_model_providers.message" xml:space="preserve" approved="yes">
+				<source>MESSAGE</source>
+				<target>MESSAGE</target>
+			</trans-unit>
+			<trans-unit id="tx_beaconizer_domain_model_providers.annotation" xml:space="preserve" approved="yes">
+				<source>ANNOTATION</source>
+				<target>ANNOTATION</target>
+			</trans-unit>
+			<trans-unit id="tx_beaconizer_domain_model_providers.description" xml:space="preserve" approved="yes">
+				<source>DESCRIPTION</source>
+				<target>DESCRIPTION</target>
+			</trans-unit>
+			<trans-unit id="tx_beaconizer_domain_model_providers.creator" xml:space="preserve" approved="yes">
+				<source>CREATOR</source>
+				<target>CREATOR</target>
+			</trans-unit>
+			<trans-unit id="tx_beaconizer_domain_model_providers.contact" xml:space="preserve" approved="yes">
+				<source>CONTACT</source>
+				<target>CONTACT</target>
+			</trans-unit>
+			<trans-unit id="tx_beaconizer_domain_model_providers.homepage" xml:space="preserve" approved="yes">
+				<source>HOMEPAGE</source>
+				<target>HOMEPAGE</target>
+			</trans-unit>
+			<trans-unit id="tx_beaconizer_domain_model_providers.feed" xml:space="preserve" approved="yes">
+				<source>FEED</source>
+				<target>FEED</target>
+			</trans-unit>
+			<trans-unit id="tx_beaconizer_domain_model_providers.timestamp" xml:space="preserve" approved="yes">
+				<source>TIMESTAMP</source>
+				<target>TIMESTAMP</target>
+			</trans-unit>
+			<trans-unit id="tx_beaconizer_domain_model_providers.update_information" xml:space="preserve" approved="yes">
+				<source>UPDATE</source>
+				<target>UPDATE</target>
+			</trans-unit>
+			<trans-unit id="tx_beaconizer_domain_model_providers.sourceset" xml:space="preserve" approved="yes">
+				<source>SOURCESET</source>
+				<target>SOURCESET</target>
+			</trans-unit>
+			<trans-unit id="tx_beaconizer_domain_model_providers.targetset" xml:space="preserve" approved="yes">
+				<source>TARGETSET</source>
+				<target>TARGETSET</target>
+			</trans-unit>
+			<trans-unit id="tx_beaconizer_domain_model_providers.name" xml:space="preserve" approved="yes">
+				<source>NAME</source>
+				<target>NAME</target>
+			</trans-unit>
+			<trans-unit id="tx_beaconizer_domain_model_providers.institution" xml:space="preserve" approved="yes">
+				<source>INSTITUTION</source>
+				<target>INSTITUTION</target>
+			</trans-unit>
+			<trans-unit id="tx_beaconizer_domain_model_providers.harvesting_data" xml:space="preserve" approved="yes">
+				<source>Harvesting information</source>
+				<target>Harvesting Informationen</target>
+			</trans-unit>
+			<trans-unit id="tx_beaconizer_domain_model_providers.harvesting_timestamp" xml:space="preserve" approved="yes">
+				<source>Last harvested</source>
+				<target>Zuletzt geharvested</target>
+			</trans-unit>
+			<trans-unit id="tx_beaconizer_domain_model_links" xml:space="preserve" approved="yes">
+				<source>BEACON Links</source>
+				<target>BEACON Links</target>
+			</trans-unit>
+			<trans-unit id="tx_beaconizer_domain_model_links.source_identifier" xml:space="preserve" approved="yes">
+				<source>Source Identifier</source>
+				<target>Ausgangs-Identifikator</target>
+			</trans-unit>
+			<trans-unit id="tx_beaconizer_domain_model_links.target_identifier" xml:space="preserve" approved="yes">
+				<source>Target Identifier</source>
+				<target>Ziel-Identifikator</target>
+			</trans-unit>
+			<trans-unit id="tx_beaconizer_domain_model_links.annotation" xml:space="preserve" approved="yes">
+				<source>Annotation</source>
+				<target>Annotation</target>
+			</trans-unit>
+			<trans-unit id="tx_beaconizer_domain_model_links.provider" xml:space="preserve" approved="yes">
+				<source>BEACON Provider</source>
+				<target>BEACON Provider</target>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2015-06-20T14:01:31Z" product-name="beaconizer">
+		<header/>
+		<body>
+			<trans-unit id="plugin.seeAlso" xml:space="preserve" approved="yes">
+				<source>See also</source>
+				<target>Siehe auch</target>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>
