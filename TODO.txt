@@ -1,5 +1,7 @@
 ## IDEAS / POSSIBLE FEATURES ##
 
+* possibility to set source identifier pattern
+
 * Scheduler task
 ** before GeneralUtility::getURL do a HEADER comparison as suggested in specification
 ** introduce logging verbosity level 1 - 3 (per scheduler task)

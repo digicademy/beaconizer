@@ -87,33 +87,43 @@ class HarvestingTask extends AbstractTask {
 				}
 			}
 
-				// either there should be a newly fetched or a still to be worked upon temporary file
+				// either there should be a newly fetched or a still to be worked on temporary file
 			if ($temporaryBeaconFile) {
 
 				$file = GeneralUtility::makeInstance('SplFileObject', $temporaryBeaconFile);
 
-					// set line pointer and import count
-				($harvestingData['linePointer'] > 0) ? $l = $harvestingData['linePointer'] : $l = 0;
-				$i = 0;
+					// set line pointer
+				($harvestingData['linePointer'] > 0) ? $linePointer = $harvestingData['linePointer'] : $linePointer = 0;
+
+					// initialize import and logging variables
 				$rowsToInsert = array();
 				$wrongNumberOfSegments = FALSE;
 				$incorrectDataInLines = FALSE;
+				$unknownLineFormat = FALSE;
+				$emptyLines = FALSE;
 
 				if (is_object($file)) {
+
 						// seek pointer in file if set
-					if ($l > 0) $file->seek($l);
-						// go on until EOF or totalPerRun is reached
+					if ($linePointer > 0) $file->seek($linePointer);
+
+						// go on until EOF...
 					while (!$file->eof()) {
 
-						if ($this->totalPerRun > 0 && $this->totalPerRun === $i) {
+							// ...or totalPerRun is reached
+						if ($this->totalPerRun > 0 && $this->totalPerRun === count($rowsToInsert)) {
 							$noDelete = 1;
 							break;
 						}
 
+							// read line
 						$line = $file->fgets();
 
-							// empty line - skip
-						if ($line == '') continue;
+							// empty line
+						if (strlen($line) === 1) {
+							$emptyLines = TRUE;
+						}
+
 							// meta line
 						if ($line{0} == '#') {
 								// #PREFIX:
@@ -161,30 +171,28 @@ class HarvestingTask extends AbstractTask {
 							// if in the middle of a file set target from provider record (which btw. keeps it for next runs)
 						if (!$fieldsValues['target'] && $currentProvider['target']) $fieldsValues['target'] = $currentProvider['target'];
 
-							// data line
+							// data line (identifier); starts with 0-9, a-z, A-Z
 						if (preg_match('/^[0-9a-zA-Z]/', $line)) {
 
 								// get data segments
 							$data = GeneralUtility::trimExplode('|', $line);
-							if (count($data) < 1 && count($data) > 3) {
-								$wrongNumberOfSegments = TRUE;
-								continue;
-							}
 
-								// process data segments
-								// rules for construction @see: http://gbv.github.io/beaconspec/beacon.html#link-construction
+								// process data segments; rules @see: http://gbv.github.io/beaconspec/beacon.html#link-construction
 							$linkValues = array();
 							$validSourceIdentifier = TRUE;
 
-								// segment 1 - always set source_identifier; mandatory
-							(preg_match('/^[a-zA-Z0-9]+$/', $data[0])) ? $linkValues['source_identifier'] = $data[0] : $validSourceIdentifier = FALSE;
+								// segment 1 - always set mandatory source identifier (for GND '-' is also allowed in identifier)
+							(preg_match('/^[a-zA-Z0-9\-]+$/', $data[0])) ? $linkValues['source_identifier'] = $data[0] : $validSourceIdentifier = FALSE;
 
 								// one data segment (source identifier) given, construct the target identifier from #TARGET + source identifier
 							if (count($data) == 1 && $validSourceIdentifier == TRUE && $fieldsValues['target']) {
+
 								($fieldsValues['message']) ? $linkValues['annotation'] = $fieldsValues['message'] : $linkValues['annotation'] = '';
 								$linkValues['target_identifier'] = str_replace('{ID}', $linkValues['source_identifier'], $fieldsValues['target']);
+
 								// two data segments given; segment two might contain a full target identifier starting with http:|https:
 							} elseif (count($data) == 2 && $validSourceIdentifier == TRUE) {
+
 								if (GeneralUtility::isValidUrl($data[1])) {
 									($fieldsValues['message']) ? $linkValues['annotation'] = $fieldsValues['message'] : $linkValues['annotation'] = '';
 									$linkValues['target_identifier'] = $data[1];
@@ -192,8 +200,10 @@ class HarvestingTask extends AbstractTask {
 									$linkValues['annotation'] = $data[1];
 									$linkValues['target_identifier'] = str_replace('{ID}', $linkValues['source_identifier'], $fieldsValues['target']);
 								}
+
 								// three data segments given
-							} else {
+							} elseif (count($data) == 3 && $validSourceIdentifier == TRUE) {
+
 									// in this case segment 2 is always used as annotation
 								$linkValues['annotation'] = $data[1];
 
@@ -220,10 +230,15 @@ class HarvestingTask extends AbstractTask {
 								if ($linkValues['annotation'] == '' && $fieldsValues['message']) {
 									$linkValues['annotation'] = $fieldsValues['message'];
 								}
+
+								// data line contains wrong number of segments
+							} else {
+								$wrongNumberOfSegments = TRUE;
 							}
 
-								// if processing of line was valid (based on source identifier and target identifier) prepare record for import, else skip this line
+								// if processing of line was valid (based on source identifier and target identifier) prepare record for import
 							if ($validSourceIdentifier === TRUE && GeneralUtility::isValidUrl($linkValues['target_identifier'])) {
+
 								$linkValues['provider'] = (int) $uid;
 								$linkValues['tstamp'] = time();
 								$linkValues['crdate'] = time();
@@ -231,26 +246,32 @@ class HarvestingTask extends AbstractTask {
 								$linkValues['hidden'] = 1;
 									// collect new link record for later bulk insertion
 								$rowsToInsert[] = $linkValues;
+
+								// if it was not valid, data in the line is incorrect
 							} else {
 								$incorrectDataInLines = TRUE;
-								continue;
 							}
 
-								// raise import count
-							$i++;
-						} else {
-							$incorrectDataInLines = TRUE;
 						}
+
+							// the line is neither empty, nor starts with #, a-z, A-Z, 0-9
+						if (preg_match('/^(?![0-9a-zA-Z\#\n])/', $line)) {
+							$unknownLineFormat = TRUE;
+						}
+
 							// raise line count
-						$l++;
+						$linePointer = $file->key();
+
 					}
 				}
 
-					// some logging if corrupt lines were in the file
+					// logging for incorrect line formats
+				if ($emptyLines === TRUE) $GLOBALS['BE_USER']->simplelog('BEACON file from provider '. htmlspecialchars($currentProvider['title']) . ' contains some empty lines that were skipped', $extKey='beaconizer', 2);
+				if ($unknownLineFormat === TRUE) $GLOBALS['BE_USER']->simplelog('BEACON file from provider '. htmlspecialchars($currentProvider['title']) . ' contains some lines with an unknown format that were skipped', $extKey='beaconizer', 2);
 				if ($wrongNumberOfSegments === TRUE) $GLOBALS['BE_USER']->simplelog('BEACON file from provider '. htmlspecialchars($currentProvider['title']) . ' contains some lines with wrong number of data segments that were skipped', $extKey='beaconizer', 2);
 				if ($incorrectDataInLines === TRUE) $GLOBALS['BE_USER']->simplelog('BEACON file from provider '. htmlspecialchars($currentProvider['title']) . ' contains some lines with incorrect data that were skipped', $extKey='beaconizer', 2);
 
-				// insert new records in a batch (values will be escaped internally)
+					// insert new records in a batch (values will be escaped internally)
 				if (count($rowsToInsert) > 0) $GLOBALS['TYPO3_DB']->exec_INSERTmultipleRows(
 					'tx_beaconizer_domain_model_links',
 					array('source_identifier', 'annotation', 'target_identifier', 'provider', 'tstamp', 'crdate', 'pid', 'hidden'),
@@ -258,13 +279,13 @@ class HarvestingTask extends AbstractTask {
 				);
 
 					// log action
-				$GLOBALS['BE_USER']->simplelog((int) $i . ' links have been harvested from provider ' . htmlspecialchars($currentProvider['title']), $extKey='beaconizer', 0);
+				$GLOBALS['BE_USER']->simplelog(count($rowsToInsert) . ' links have been harvested from provider ' . htmlspecialchars($currentProvider['title']), $extKey='beaconizer', 0);
 
 					// in case we have to continue with the next scheduler run keep the temporary file
 				if ($noDelete === 1) {
 					$harvestingData['fileName'] = $temporaryBeaconFile;
-					$harvestingData['totalImported'] = $harvestingData['totalImported'] + $i;
-					$harvestingData['linePointer'] = $l-1;
+					$harvestingData['totalImported'] = $harvestingData['totalImported'] + count($rowsToInsert);
+					$harvestingData['linePointer'] = $linePointer;
 					$fieldsValues['harvesting_data'] = serialize($harvestingData);
 					$fieldsValues['harvesting_timestamp'] = time();
 				} else {
