@@ -1,3 +1,9 @@
+## NEXT ##
+
+- introduce tx_beaconizer_domain_model_identifiers with 1:1 parent => tx_beaconizer_domain_model_providers
+- generic concept for including IRRE relation field from other tables to identifiers table
+-- like makeCategorizable => makeBeaconizable
+
 ## IDEAS / POSSIBLE FEATURES ##
 
 * possibility to set source identifier pattern
