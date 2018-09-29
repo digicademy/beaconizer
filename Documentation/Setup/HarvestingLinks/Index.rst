@@ -6,13 +6,13 @@
 .. include:: ../../Includes.txt
 
 
-Harvesting links
-----------------
+Harvesting BEACON links
+-----------------------
 
 There are millions of links out there offered by libraries, cultural heritage organisations
-and other initiatives via BEACON files. How can you make use of this? Say you have a set of
+and other initiatives via BEACON files. How can you make use of this? Lets say you have a set of
 biographies about persons on your website. Once you have equipped your records with identifiers
-from an authority file (for example with the `GND <https://en.wikipedia.org/wiki/Integrated_Authority_File>`_,
+from an authority file (for example from the `GND <https://en.wikipedia.org/wiki/Integrated_Authority_File>`_,
 the authority file of the German National Library), it becomes possible to connect your
 biographies to other resources on the web that share the same identifier.
 
@@ -32,13 +32,13 @@ Go to the scheduler module and create a new *BEACON Harvesting* task.
    :alt: BEACON harvesting job
 
 Set a frequency and select the provider(s) you would like to harvest in the selector
-box. That's basically it.
+box. That's it.
 
 According to the specification, a BEACON aggregator should check the TIMESTAMP and/or UPDATE fields
 in the BEACON files for when to update the local copy of the data. The Beaconizer does this on each
 run of the scheduler. If the timestamp in the remote file is newer than the timestamp in the local
 provider record, the file is reharvested. If there is no timestamp but an UPDATE field, this is taken
-as basis for when to harvest a file again.
+as basis for when to harvest a BEACON file again.
 
 Here is an overview over the other settings in the scheduler task:
 
@@ -47,7 +47,7 @@ Force harvesting
 
 Number of links per provider per run
   By default the Beaconizer fully harvests all links of a given BEACON file. Since a file can contain
-  millions of links this can put your server and your database under quite some stress.
+  millions of links this can put your server and your database under some stress.
   To avoid generating too much load you can specify a maximum number of links that should be
   harvested with each scheduler run. In case the scheduler task reaches this limit, it will stop the
   import, keep a temporary copy of the BEACON file and set a pointer to the position in the file where
@@ -55,14 +55,14 @@ Number of links per provider per run
   until the file has been fully harvested
 
 PID for harvesting
-  By default, harvested links are placed on the same page where the provider resides. Here you
+  By default, harvested links are placed on the same page where the provider record is kept. Here you
   can specify a different page
 
 Harvesting strategies
 ^^^^^^^^^^^^^^^^^^^^^
 
 Depending on your use case it can happen that you need to harvest huge BEACON files containing
-millions of links. For such scenarios the next paragraphs try to give you some hints.
+millions of links. For such scenarios the next section tries to give you some recommendations.
 
 Link rotation
 """""""""""""
@@ -128,7 +128,7 @@ As often, the answer is that it depends on your use case. Putting providers in s
 set different harvesting intervals for each BEACON file. On the other hand, grouping providers in one
 task can help in keeping an overview on what gets harvested and when.
 
-Also file size can play an important factor. It is cheaper to put a very large BEACON file in a separate task
+Also file size can play an important role. It is cheaper to put a very large BEACON file in a separate task
 and harvest it with a lesser number of links each turn than to stuff it in a task where
 smaller BEACON files get harvested in full. The best thing is to try a bit, watch
 the system log and find out which strategy is working best for your scenario.

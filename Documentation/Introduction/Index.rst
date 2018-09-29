@@ -12,30 +12,30 @@ Introduction
 What does it do?
 ^^^^^^^^^^^^^^^^
 
-With the Beaconizer you can harvest links based on authority files (BEACON files), enrich
-your detail views with context related links ("see also" links) and open
-your data to external applications and webservices via dynamically generated BEACON files.
+With the TYPO3 Beaconizer you can harvest links from authority files (BEACON files), automatically enrich
+your website content with related links ("see also" links) and open your data to external applications
+with dynamically generated BEACON files.
 
-BEACON what? BEACON is a simple file format to exchange hyperlinks. A BEACON file
-contains a 1-to-1 (or 1-to-n) mapping from identifiers to links. Each link consists of
-at least an URL with an optional annotation (you can read `more about the
-format and it's purposes in Wikipedia <https://meta.wikimedia.org/wiki/Dynamic_links_to_external_resources>`_).
+BEACON is a simple text based file format to exchange hyperlinks. A BEACON file
+contains a 1-to-1 (or 1-to-n) mapping from normdata identifiers to links. Each link consists of
+an URL with an optional annotation (read `more about BEACON files and their purpose in the English
+Wikipedia <https://meta.wikimedia.org/wiki/Dynamic_links_to_external_resources>`_).
 
-Why is this cool? Because with a BEACON file you connect your data to the outside world via harvestable
-links. At the same time you can provide your users with context related links in your detail views.
-Have a look at `this poster <http://eprints.rclis.org/15407/2/isi2011_beacon_poster.pdf>`_ which
-succinctly explains the benefits of using BEACON.
+A BEACON file connects your TYPO3 pages and data to the outside world via harvestable links. At the same
+time you can provide your users with context related links in your detail views. Have a look at
+`this poster <http://eprints.rclis.org/15407/2/isi2011_beacon_poster.pdf>`_ which explains the
+benefits of using BEACON.
 
 Features
 ^^^^^^^^
 
-The Beaconizer features
+The TYPO3 Beaconizer consists of three components:
 
 - a scheduler job for harvesting links from BEACON files
 
-- a BEACON generator for your data (you can map any table)
+- a BEACON generator for your data (you can map any TYPO3 table)
 
-- a SeeAlso plugin for inclusion in your detail views (usable with any Extbase extension)
+- a seeAlso plugin that generates context related links for authority identifiers
 
 Screenshots
 ^^^^^^^^^^^
@@ -55,15 +55,13 @@ Scheduler task for harvesting link data from BEACON file providers
 Credits
 ^^^^^^^
 
-This extension is being developed by the `Digital Academy <http://www.digitale-akademie.de/>`_
-of the `Academy of Sciences and Literature | Mainz <http://www.adwmainz.de>`_ in the context of
+This extension is developed by the `Digital Academy <http://www.digitale-akademie.de/>`_
+of the `Academy of Sciences and Literature | Mainz <http://www.adwmainz.de>`_ for
 our `Digital Humanities Projects <http://www.digitale-akademie.de/projekte/matrix.html>`_.
 
 
 Join development
 ^^^^^^^^^^^^^^^^
 
-The Beaconizer is *beta software* at the moment. This means, all features are considered stable
-enough to be used in production. But now is the time to test, test, test.. The development takes
-place on `Github <https://github.com/digicademy/beaconizer>`_. You are very welcome to join us
-if you wish to take part in the development or if you have found a bug.
+Collaborative development of the TYPO3 Beaconizer takes place on `Github <https://github.com/digicademy/beaconizer>`_.
+You are very welcome to join in and submit pull requests.

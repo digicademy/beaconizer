@@ -12,8 +12,10 @@ Changelog
 +----------------+---------------------------------------------------------------+
 | Version        | Changes                                                       |
 +================+===============================================================+
-| 1.0.0 (stable) | - PSR-1/2 compatibility                                       |
-|                | - Compatible with TYPO3 7.6-8.7                               |
+| 1.0.0 (stable) | - Compatible with TYPO3 7.6-9.5                               |
+|                | - PSR-1/2 code compatibility                                  |
+|                | - BEACON generator / seeAlso for regular TYPO3 pages          |
+|                | - Enhance documentation                                       |
 +----------------+---------------------------------------------------------------+
 | 0.1.0 (beta)   | - First public version                                        |
 +----------------+---------------------------------------------------------------+

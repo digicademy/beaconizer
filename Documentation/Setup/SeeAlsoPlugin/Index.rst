@@ -9,35 +9,33 @@
 SeeAlso plugin
 --------------
 
-*SeeAlso* is a `simple API <http://www.gbv.de/wikis/cls/SeeAlso_Simple_Specification>`_
-to query for links. BEACON and *SeeAlso* are independent but compatible
-techniques. Both can be used to transfer the same information (which is
-relevant links to external resources).
-
-Important: The *SeeAlso plugin* of the Beaconizer is **no SeeAlso server** according
-to the API mentioned above. It's purpose is to enrich your detail views
-with context related links. The plugin performs a lookup based on identifiers, either
-against the harvested links in your TYPO3 database or against the
-`beacon.findbuch.de <http://beacon.findbuch.de/seealso/pnd-aks>`_ webservice. It can
-be bound to any detail view of any Extbase extension.
+The purpose of the SeeAlso plugin is to enhance your detail views with context related links.
+The plugin performs a lookup based on identifiers, either against the harvested links in your
+TYPO3 database or against the `beacon.findbuch.de <http://beacon.findbuch.de/seealso/pnd-aks>`_
+webservice. It can be bound to any detail view of any Extbase extension and to regular TYPO3
+pages.
 
 .. figure:: ../../Images/see-also.png
    :alt: SeeAlso plugin
+
+From version 1.0.0 of the TYPO3 Beaconizer it is also possible to use the plugin not only
+for extension records but also for regular TYPO3 pages. Please read the tutorial section in this
+manual for further information.
 
 Requirements for the SeeAlso plugin
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 You will need two things for the *SeeAlso plugin* to work:
 
-1) (Authoritative) identifiers in your records, ideally from one of the national or international authority files (`GND <https://en.wikipedia.org/wiki/Integrated_Authority_File>`_, `VIAF <https://viaf.org/>`_, `Library of Congress <http://id.loc.gov/authorities/names.html>`_ etc.).
+1) Authoritative identifiers in your records from one of the national or international authority files (`GND <https://en.wikipedia.org/wiki/Integrated_Authority_File>`_, `VIAF <https://viaf.org/>`_, `Library of Congress <http://id.loc.gov/authorities/names.html>`_ etc.).
 
-2) An Extbase detail view with an URL argument from which the currently displayed object can be inferred (a uid etc.)
+2) A URL argument from which the currently displayed object can be inferred (uid etc.)
 
 How it works
 ^^^^^^^^^^^^
 
-The *SeeAlso plugin* should be placed on the page with the detail view for which
-you would like to show "see also" links. You need to provide a simple TypoScript
+The *SeeAlso plugin* should be placed on the page with the detail view on which
+you would like to show "SeeAlso" links. You need to provide a simple TypoScript
 mapping (see below). Once set, the plugin will keep an eye on the incoming URL arguments
 and once it spots the argument that you have mapped as identifying argument for
 your objects, it will fetch the record from the database, take the value of the
@@ -67,17 +65,17 @@ object. Put the following in your template:
     }
   }
 
-You can map any object using it's Extbase class. Below the class name you have to set the
-following three options (mandatory):
+You can map any object by using the according classname. Below the classname you have to set the
+following three options:
 
-pluginNamespace
+pluginNamespace (optional)
   This is the plugin namespace of the "other" plugin on the page that shows the detail
   view
-argumentName
+argumentName (mandatory)
   This is the argument name of the detail view that contains the uid or identifier of
   the object by which the *SeeAlso plugin* will try to fetch the record from the database.
   Do not confuse this with the authoritative identifier (see next property)
-sourceIdentifierProperty
+sourceIdentifierProperty (mandatory)
   This property contains the authoritative identifier (GND, VIAF, etc.) for the
   object. The *SeeAlso lookup* will be performed using this value
 
@@ -133,9 +131,6 @@ In this case all links to *Open Library* start with https://openlibrary.org/auth
 If you insert this pattern into the *Target pattern"* field of your *Open Library* provider
 record, a string comparison will be done during the lookup action and only if a link
 starts with the same pattern the link will be included in the result.
-
-Please keep in mind that this is not done with a simple string comparison from the beginning
-of both strings.
 
 Fluid template
 ^^^^^^^^^^^^^^

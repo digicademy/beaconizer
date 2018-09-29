@@ -2,7 +2,7 @@
 
 $EM_CONF[$_EXTKEY] = array(
     'title' => 'Beaconizer',
-    'description' => 'Harvest data from BEACON providers and BEACONize your data. See: https://meta.wikimedia.org/wiki/Dynamic_links_to_external_resources',
+    'description' => 'Harvest data from BEACON files and BEACONize your data. See: https://meta.wikimedia.org/wiki/Dynamic_links_to_external_resources',
     'category' => 'fe',
     'author' => 'Torsten Schrade',
     'author_email' => 'Torsten.Schrade@adwmainz.de',
@@ -22,7 +22,7 @@ $EM_CONF[$_EXTKEY] = array(
     'version' => '1.0.0',
     'constraints' => array(
         'depends' => array(
-            'typo3' => '7.6.0-8.7.99',
+            'typo3' => '7.6.0-9.5.99',
             'extbase' => '',
             'fluid' => '',
         ),

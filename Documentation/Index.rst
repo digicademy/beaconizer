@@ -30,13 +30,16 @@ Beaconizer
 		GND, VIAF, BEACON, Linked Data, Semantic Web
 
 	:Copyright:
-		2015
+		2018
 
 	:Author:
 		Torsten Schrade
 
 	:Email:
 		Torsten.Schrade@adwmainz.de
+
+	:Institution:
+		Academy of Sciences and Literature | Mainz
 
 	:License:
 		This document is published under the Open Content License
@@ -50,9 +53,6 @@ Beaconizer
 
 	**Other versions of this document**
 
-	:PDF:
-		http://docs.typo3.org/typo3cms/extensions/beaconizer/latest/_pdf/
-
 	**Table of Contents**
 
 .. toctree::
@@ -64,6 +64,7 @@ Beaconizer
 	Resources/Index
 	Installation/Index
 	Setup/Index
+	Tutorial/Index
 	KnownProblems/Index
 	ToDoList/Index
 	Changelog/Index
