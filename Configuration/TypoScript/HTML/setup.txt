@@ -1,8 +1,8 @@
 plugin.tx_beaconizer {
 	view {
-		layoutRootPath = EXT:beaconizer/Resources/Private/HTML/Layouts/
-		partialRootPath = EXT:beaconizer/Resources/Private/HTML/Partials/
-		templateRootPath = EXT:beaconizer/Resources/Private/HTML/Templates/
+		layoutRootPaths.10 = EXT:beaconizer/Resources/Private/HTML/Layouts/
+		partialRootPaths.10 = EXT:beaconizer/Resources/Private/HTML/Partials/
+		templateRootPaths.10 = EXT:beaconizer/Resources/Private/HTML/Templates/
 	}
 }
 
@@ -14,6 +14,13 @@ plugin.tx_beaconizer_seealso {
 #				argumentName = myArgumentName
 #				sourceIdentifierProperty = myProperty
 #			}
+		}
+	}
+	persistence.classes {
+		ADWLM\Beaconizer\Domain\Model\Page {
+			mapping {
+				tableName = pages
+			}
 		}
 	}
 }

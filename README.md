@@ -7,3 +7,5 @@ BEACON is a simple file format to exchange hyperlinks. A BEACON file contains a 
 This is the development repository for the Beaconizer. You can find all official extension releases is the TYPO3 Extension Repository at http://typo3.org/extensions/repository/view/beaconizer.
 
 The full documentation is at http://docs.typo3.org/typo3cms/extensions/beaconizer/.
+
+**TYPO3 version compatibility**: 7.6.0-8.7.99

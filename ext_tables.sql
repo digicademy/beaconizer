@@ -75,3 +75,13 @@ CREATE TABLE tx_beaconizer_domain_model_providers (
 	KEY parent (pid),
 	KEY link_pattern (link_pattern)
 );
+
+#
+# Table structure for table 'pages'
+#
+CREATE TABLE pages (
+
+	source_identifier varchar(40) DEFAULT '' NOT NULL,
+
+	KEY source_identifier (source_identifier),
+);

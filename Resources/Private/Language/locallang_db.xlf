@@ -126,6 +126,10 @@
 			<trans-unit id="tx_beaconizer_domain_model_links.provider" xml:space="preserve">
 				<source>BEACON Provider</source>
 			</trans-unit>
+
+			<trans-unit id="pages.source_identifier" xml:space="preserve">
+				<source>Identifier (from authority file)</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

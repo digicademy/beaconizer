@@ -29,9 +29,9 @@ namespace ADWLM\Beaconizer\Domain\Model;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 /**
- * Harvested BEACON links
+ * TYPO3 Page
  */
-class Links extends AbstractEntity
+class Page extends AbstractEntity
 {
 
     /**
@@ -41,28 +41,6 @@ class Links extends AbstractEntity
      * @validate NotEmpty
      */
     protected $sourceIdentifier;
-
-    /**
-     * Provider of the link
-     *
-     * @var \ADWLM\Beaconizer\Domain\Model\Providers $provider
-     * @lazy
-     */
-    protected $provider;
-
-    /**
-     * Annotation
-     *
-     * @var string $annotation
-     */
-    protected $annotation;
-
-    /**
-     * Target identifier
-     *
-     * @var string $targetIdentifier
-     */
-    protected $targetIdentifier;
 
     /**
      * __construct
@@ -93,72 +71,6 @@ class Links extends AbstractEntity
     public function setSourceIdentifier($sourceIdentifier)
     {
         $this->sourceIdentifier = $sourceIdentifier;
-    }
-
-    /**
-     * Returns the provider
-     *
-     * @return \ADWLM\Beaconizer\Domain\Model\Providers $provider
-     */
-    public function getProvider()
-    {
-        return $this->provider;
-    }
-
-    /**
-     * Sets the provider
-     *
-     * @param \ADWLM\Beaconizer\Domain\Model\Providers $provider
-     *
-     * @return void
-     */
-    public function setProvider($provider)
-    {
-        $this->provider = $provider;
-    }
-
-    /**
-     * Returns the annotation
-     *
-     * @return string
-     */
-    public function getAnnotation()
-    {
-        return $this->annotation;
-    }
-
-    /**
-     * Sets the annotation
-     *
-     * @param string $annotation
-     *
-     * @return void
-     */
-    public function setAnnotation($annotation)
-    {
-        $this->annotation = $annotation;
-    }
-
-    /**
-     * Returns the targetIdentifier
-     *
-     * @return string
-     */
-    public function getTargetIdentifier()
-    {
-        return $this->targetIdentifier;
-    }
-
-    /**
-     * Sets the targetIdentifier
-     *
-     * @param string $targetIdentifier
-     *
-     * @return void
-     */
-    public function setTargetIdentifier($targetIdentifier)
-    {
-        $this->targetIdentifier = $targetIdentifier;
     }
 
 }

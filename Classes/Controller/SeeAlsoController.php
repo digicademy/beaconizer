@@ -1,9 +1,11 @@
 <?php
+
 namespace ADWLM\Beaconizer\Controller;
+
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2015 Torsten Schrade <Torsten.Schrade@adwmainz.de>, Academy of Sciences and Literature | Mainz
+ *  (c) 2018 Torsten Schrade <Torsten.Schrade@adwmainz.de>, Academy of Sciences and Literature | Mainz
  *
  *  All rights reserved
  *
@@ -24,86 +26,130 @@ namespace ADWLM\Beaconizer\Controller;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use \TYPO3\CMS\Core\Utility\GeneralUtility;
-use \TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Extbase\Property\PropertyMapper;
+use TYPO3\CMS\Extbase\Reflection\ReflectionService;
 
 /**
  * Controller for outputting data as BEACON file
  */
-class SeeAlsoController extends ActionController {
+class SeeAlsoController extends ActionController
+{
 
-	/**
-	 * BEACON link repository
-	 *
-	 * @var \ADWLM\Beaconizer\Domain\Repository\LinksRepository
-	 * @inject
-	 */
-	protected $linksRepository;
+    /**
+     * BEACON link repository
+     *
+     * @var \ADWLM\Beaconizer\Domain\Repository\LinksRepository
+     * @inject
+     */
+    protected $linksRepository;
 
-	/**
-	 * beacon.findbuch.de webservice
-	 *
-	 * @var \ADWLM\Beaconizer\Service\BeaconFindbuchService
-	 * @inject
-	 */
-	protected $beaconFindbuchService;
+    /**
+     * beacon.findbuch.de webservice
+     *
+     * @var \ADWLM\Beaconizer\Service\BeaconFindbuchService
+     * @inject
+     */
+    protected $beaconFindbuchService;
 
-	/**
-	 * Walks through current request arguments (but only if no identifier arguments is set) based on TypoScript
-	 * configuration and, if a matching object is found, maps this object, tries to retrieve its identifier,
-	 * and sets it as identifier argument for the lookUp action
-	 *
-	 * @return void
-	 */
-	public function initializeAction() {
-		if ($this->settings['objectMapping'] && !$this->request->hasArgument('sourceIdentifier')) {
-			foreach ($this->settings['objectMapping'] as $mappedObject => $values) {
-				if ($values['pluginNamespace'] && $values['argumentName']) {
-					$foreignPluginVars = GeneralUtility::_GPmerged($values['pluginNamespace']);
-					if ($foreignPluginVars[$values['argumentName']] > 0) {
-						$foreignObjectUid = (int) $foreignPluginVars[$values['argumentName']];
-						$propertyMapper = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Property\\PropertyMapper');
-						$foreignObject = $propertyMapper->convert($foreignObjectUid, $mappedObject);
-						if ($foreignObject instanceof $mappedObject) {
-							$reflectionService = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Reflection\\ReflectionService');
-							$sourceIdentifierGetter = 'get' . ucfirst($values['sourceIdentifierProperty']);
-							if ($reflectionService->hasMethod($mappedObject, $sourceIdentifierGetter)) {
-								$sourceIdentifier = $foreignObject->$sourceIdentifierGetter();
-								if ($sourceIdentifier) {
-									$this->request->setArgument('sourceIdentifier', $sourceIdentifier);
-									break;
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-	}
+    /**
+     * Walks through current request arguments (but only if no identifier arguments is set) based on TypoScript
+     * configuration and, if a matching object is found, maps this object, tries to retrieve its identifier,
+     * and sets it as identifier argument for the lookUp action
+     *
+     * @return void
+     * @throws
+     */
+    public function initializeAction()
+    {
 
-	/**
-	 * Looks up links by incoming GND, either internally in DB or the against beacon.findbuch.de webservice.
-	 *
-	 * @param string $sourceIdentifier
-	 *
-	 * @return string The rendered view
-	 */
-	public function lookUpAction($sourceIdentifier = '') {
+        if ($this->settings['objectMapping'] && !$this->request->hasArgument('sourceIdentifier')) {
+            foreach ($this->settings['objectMapping'] as $mappedObject => $values) {
+                if ($values['argumentName']) {
 
-		$providers = GeneralUtility::intExplode(',', $this->settings['general']['providers'], TRUE);
+                    if ($values['pluginNamespace']) {
+                        $foreignPluginVars = GeneralUtility::_GPmerged($values['pluginNamespace']);
+                        if ($foreignPluginVars[$values['argumentName']] > 0) {
+                            $foreignObjectUid = (int)$foreignPluginVars[$values['argumentName']];
+                        }
+                    } else {
+                        $getParameters = GeneralUtility::_GET();
+                        $postParameters = GeneralUtility::_POST();
+                        if ($getParameters[$values['argumentName']] > 0) {
+                            $foreignObjectUid = (int)$getParameters[$values['argumentName']];
+                        } elseif ($postParameters[$values['argumentName']] > 0) {
+                            $foreignObjectUid = (int)$postParameters[$values['argumentName']];
+                        }
+                    }
 
-		switch ((int) $this->settings['general']['mode']) {
-			case 2:
-					$links = $this->beaconFindbuchService->retrieveLinks($sourceIdentifier, $providers);
-				break;
-			case 1:
-			default:
-					$links = $this->linksRepository->findBySourceIdentifier($sourceIdentifier, $providers);
-				break;
-		}
+                    if ($foreignObjectUid > 0) {
+                        $propertyMapper = $this->objectManager->get(PropertyMapper::class);
+                        $foreignObject = $propertyMapper->convert($foreignObjectUid, $mappedObject);
+                        if ($foreignObject instanceof $mappedObject) {
+                            $reflectionService = $this->objectManager->get(ReflectionService::class);
+                            $sourceIdentifierGetter = 'get' . ucfirst($values['sourceIdentifierProperty']);
+                            if ($reflectionService->hasMethod($mappedObject, $sourceIdentifierGetter)) {
+                                $sourceIdentifier = $foreignObject->$sourceIdentifierGetter();
+                                if ($sourceIdentifier) {
+                                    $this->request->setArgument('sourceIdentifier', $sourceIdentifier);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
-		$this->view->assign('links', $links);
-	}
+        if ($this->settings['objectMapping'] && !$this->request->hasArgument('sourceIdentifier')) {
+            foreach ($this->settings['objectMapping'] as $mappedObject => $values) {
+                if ($values['pluginNamespace'] && $values['argumentName']) {
+                    $foreignPluginVars = GeneralUtility::_GPmerged($values['pluginNamespace']);
+                    if ($foreignPluginVars[$values['argumentName']] > 0) {
+                        $foreignObjectUid = (int)$foreignPluginVars[$values['argumentName']];
+                        $propertyMapper = $this->objectManager->get(PropertyMapper::class);
+                        $foreignObject = $propertyMapper->convert($foreignObjectUid, $mappedObject);
+                        if ($foreignObject instanceof $mappedObject) {
+                            $reflectionService = $this->objectManager->get(ReflectionService::class);
+                            $sourceIdentifierGetter = 'get' . ucfirst($values['sourceIdentifierProperty']);
+                            if ($reflectionService->hasMethod($mappedObject, $sourceIdentifierGetter)) {
+                                $sourceIdentifier = $foreignObject->$sourceIdentifierGetter();
+                                if ($sourceIdentifier) {
+                                    $this->request->setArgument('sourceIdentifier', $sourceIdentifier);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Looks up links by incoming GND, either internally in DB or the against beacon.findbuch.de webservice.
+     *
+     * @param string $sourceIdentifier
+     *
+     * @return string The rendered view
+     */
+    public function lookUpAction($sourceIdentifier = '')
+    {
+
+        $providers = GeneralUtility::intExplode(',', $this->settings['general']['providers'], true);
+
+        switch ((int)$this->settings['general']['mode']) {
+            case 2:
+                $links = $this->beaconFindbuchService->retrieveLinks($sourceIdentifier, $providers);
+                break;
+            case 1:
+            default:
+                $links = $this->linksRepository->findBySourceIdentifier($sourceIdentifier, $providers);
+                break;
+        }
+
+        $this->view->assign('links', $links);
+    }
 
 }
-?>

@@ -20,7 +20,9 @@ beacon {
 
 	config {
 		disableAllHeaderCode = 1
-		additionalHeaders = Content-type:text/plain
+		additionalHeaders.10 {
+			header = Content-type:text/plain
+		}
 		admPanel = 0
 		xhtml_cleaning = 0
 		disablePrefixComment = 1
@@ -34,9 +36,9 @@ beacon {
 
 plugin.tx_beaconizer_generator {
 	view {
-		layoutRootPath = EXT:beaconizer/Resources/Private/BEACON/Layouts/
-		partialRootPath = EXT:beaconizer/Resources/Private/BEACON/Partials/
-		templateRootPath = EXT:beaconizer/Resources/Private/BEACON/Templates/
+		layoutRootPaths.10 = EXT:beaconizer/Resources/Private/BEACON/Layouts/
+		partialRootPaths.10 = EXT:beaconizer/Resources/Private/BEACON/Partials/
+		templateRootPaths.10 = EXT:beaconizer/Resources/Private/BEACON/Templates/
 	}
 }
 

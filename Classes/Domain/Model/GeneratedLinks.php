@@ -1,9 +1,11 @@
 <?php
+
 namespace ADWLM\Beaconizer\Domain\Model;
+
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2015 Torsten Schrade <Torsten.Schrade@adwmainz.de>, Academy of Sciences and Literature | Mainz
+ *  (c) 2018 Torsten Schrade <Torsten.Schrade@adwmainz.de>, Academy of Sciences and Literature | Mainz
  *
  *  All rights reserved
  *
@@ -23,9 +25,7 @@ namespace ADWLM\Beaconizer\Domain\Model;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+class GeneratedLinks extends Links
+{
 
-use \ADWLM\Beaconizer\Domain\Model\Links;
-
-class GeneratedLinks extends Links {
 }
-?>

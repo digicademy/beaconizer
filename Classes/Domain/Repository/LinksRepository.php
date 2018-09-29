@@ -1,9 +1,11 @@
 <?php
+
 namespace ADWLM\Beaconizer\Domain\Repository;
+
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2015 Torsten Schrade <Torsten.Schrade@adwmainz.de>, Academy of Sciences and Literature | Mainz
+ *  (c) 2018 Torsten Schrade <Torsten.Schrade@adwmainz.de>, Academy of Sciences and Literature | Mainz
  *
  *  All rights reserved
  *
@@ -24,68 +26,71 @@ namespace ADWLM\Beaconizer\Domain\Repository;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use \TYPO3\CMS\Extbase\Persistence\Repository;
-use \TYPO3\CMS\Extbase\Persistence\QueryInterface;
+use TYPO3\CMS\Extbase\Persistence\QueryInterface;
+use TYPO3\CMS\Extbase\Persistence\Repository;
 
 /**
-* Repository for BEACON links
-*/
-class LinksRepository extends Repository {
+ * Repository for BEACON links
+ */
+class LinksRepository extends Repository
+{
 
-	/**
-	 * Performs a findBy for the submitted source identifier, possibly taking selected providers into account as constraint
-	 *
-	 * @param string $sourceIdentifier
-	 * @param array $providers
-	 *
-	 * @return \TYPO3\CMS\Extbase\Persistence\Generic\QueryResult
-	 */
-	public function findBySourceIdentifier($sourceIdentifier, $providers = array()) {
+    /**
+     * Performs a findBy for the submitted source identifier, possibly taking selected providers into account as constraint
+     *
+     * @param string $sourceIdentifier
+     * @param array  $providers
+     *
+     * @return \TYPO3\CMS\Extbase\Persistence\Generic\QueryResult
+     * @throws
+     */
+    public function findBySourceIdentifier($sourceIdentifier, $providers = array())
+    {
 
-			// initialize query object
-		$query = $this->createQuery();
+        // initialize query object
+        $query = $this->createQuery();
 
-			// prepare constraints array
-		$constraints = array();
+        // prepare constraints array
+        $constraints = array();
 
-			// possibly set provider constraint
-		if (!empty($providers)) {
-			$constraints[] = $query->like('sourceIdentifier', $sourceIdentifier);
-			$constraints[] = $query->in('provider', $providers);
-			$query->matching($query->logicalAnd($constraints));
-		} else {
-			$query->matching($query->like('sourceIdentifier', $sourceIdentifier));
-		}
+        // possibly set provider constraint
+        if (!empty($providers)) {
+            $constraints[] = $query->like('sourceIdentifier', $sourceIdentifier);
+            $constraints[] = $query->in('provider', $providers);
+            $query->matching($query->logicalAnd($constraints));
+        } else {
+            $query->matching($query->like('sourceIdentifier', $sourceIdentifier));
+        }
 
-			// set ordering
-		$query->setOrderings(
-			array('provider.title' => QueryInterface::ORDER_ASCENDING)
-		);
+        // set ordering
+        $query->setOrderings(
+            array('provider.title' => QueryInterface::ORDER_ASCENDING)
+        );
 
-			// execute the query
-		return $query->execute();
-	}
+        // execute the query
+        return $query->execute();
+    }
 
-	/**
-	 * Gets rows from the specified table and returns them to the controller
-	 *
-	 * @param string $tableName The name of the table to output BEACON data for
-	 * @param object $cObj Instance of the current content object
-	 *
-	 * @return mixed
-	 */
-	public function findRowsToMap($tableName, $cObj) {
+    /**
+     * Gets rows from the specified table and returns them to the controller
+     *
+     * @param string $tableName The name of the table to output BEACON data for
+     * @param object $cObj      Instance of the current content object
+     *
+     * @return mixed
+     */
+    public function findRowsToMap($tableName, $cObj)
+    {
 
-		$pages = $GLOBALS['TYPO3_DB']->cleanIntList($cObj->data['pages']);
+        $pages = $GLOBALS['TYPO3_DB']->cleanIntList($cObj->data['pages']);
 
-		$result = $GLOBALS['TYPO3_DB']->exec_SELECTgetRows(
-			'*',
-			$tableName,
-			'pid IN(' . $pages . ')' . $cObj->enableFields($tableName)
-		);
+        $result = $GLOBALS['TYPO3_DB']->exec_SELECTgetRows(
+            '*',
+            $tableName,
+            'pid IN(' . $pages . ')' . $cObj->enableFields($tableName)
+        );
 
-		return $result;
+        return $result;
 
-	}
+    }
 }
-?>

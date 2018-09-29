@@ -1,0 +1,32 @@
+{
+    "name": "adwlm/beaconizer",
+    "type": "typo3-cms-extension",
+    "description": "BEACON link haversting and generation TYPO3",
+    "homepage": "https://extensions.typo3.org/extension/beaconizer/",
+    "authors": [
+        {
+          "name": "Torsten Schrade",
+          "email": "Torsten.Schrade@adwmainz.de",
+          "role": "Developer",
+          "homepage": "http://www.adwmainz.de"
+        }
+    ],
+    "license": ["GPL-2.0+"],
+    "keywords": ["TYPO3", "BEACON", "Digital Humanities", "Linked Open Data"],
+    "support": {
+        "issues": "https://github.com/digicademy/beaconizer/issues"
+    },
+    "version": "1.0.0",
+    "require": {
+        "typo3/cms-core": ">=7.6.0 || <=8.7.99"
+    },
+    "replace": {
+        "beaconizer": "self.version",
+        "typo3-ter/beaconizer": "self.version"
+    },
+    "autoload": {
+        "psr-4": {
+          "ADWLM\\Beaconizer\\": "Classes/"
+        }
+    }
+}

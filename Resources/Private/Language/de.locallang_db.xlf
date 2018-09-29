@@ -167,6 +167,11 @@
 				<source>BEACON Provider</source>
 				<target>BEACON Provider</target>
 			</trans-unit>
+
+			<trans-unit id="pages.source_identifier" xml:space="preserve">
+				<source>Identifier (from authority file)</source>
+				<target>Identifikator (aus Normdatei)</target>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

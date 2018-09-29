@@ -1,9 +1,11 @@
 <?php
+
 namespace ADWLM\Beaconizer\ViewHelpers;
+
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2015 Torsten Schrade <Torsten.Schrade@adwmainz.de>, Academy of Sciences and Literature | Mainz
+ *  (c) 2018 Torsten Schrade <Torsten.Schrade@adwmainz.de>, Academy of Sciences and Literature | Mainz
  *
  *  All rights reserved
  *
@@ -24,16 +26,18 @@ namespace ADWLM\Beaconizer\ViewHelpers;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
+use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
 
-class LineFormatterViewHelper extends AbstractViewHelper {
+class LineFormatterViewHelper extends AbstractViewHelper
+{
 
-	/**
-	 * @return string The content with removed empty lines
-	 */
-	public function render() {
-		$content = $this->renderChildren();
-		return preg_replace("/(^[\r\n]*|[\r\n]+)[\s\t]*[\r\n]+/", "\n", $content);
-	}
+    /**
+     * @return string The content with removed empty lines
+     */
+    public function render()
+    {
+        $content = $this->renderChildren();
+
+        return preg_replace("/(^[\r\n]*|[\r\n]+)[\s\t]*[\r\n]+/", "\n", $content);
+    }
 }
-?>
