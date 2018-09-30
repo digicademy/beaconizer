@@ -18,7 +18,7 @@ return array(
             'disabled' => 'hidden',
         ),
         'searchFields' => 'title,link_pattern,prefix,target,relation,message,annotation,description,creator,contact,homepage,feed,sourceset,targetset,name,institution',
-        'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('beaconizer') . 'Resources/Public/Icons/tx_beaconizer_domain_model_providers.png'
+        'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('beaconizer') . 'Resources/Public/Icons/tx_beaconizer_domain_model_providers.svg'
     ),
     'interface' => array(
         'showRecordFieldList' => '

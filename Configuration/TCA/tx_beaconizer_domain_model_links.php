@@ -19,7 +19,7 @@ return array(
             'disabled' => 'hidden',
         ),
         'searchFields' => 'source_identifier,annotation,target_identifier',
-        'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('beaconizer') . 'Resources/Public/Icons/tx_beaconizer_domain_model_links.png'
+        'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('beaconizer') . 'Resources/Public/Icons/tx_beaconizer_domain_model_links.svg'
     ),
     'interface' => array(
         'showRecordFieldList' => '
