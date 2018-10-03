@@ -12,7 +12,7 @@ The documentation is at [http://docs.typo3.org/typo3cms/extensions/beaconizer/](
 
 ## TYPO3 compatibility
 
-| News        | TYPO3      | PHP       | Support/Development                     |
+| Version     | TYPO3      | PHP       | Support/Development                     |
 | ----------- | ---------- | ----------|---------------------------------------- |
 | 1.x         | 7.6 - 8.7  | 5.6 - 7.2 | Features, Bugfixes, Security Updates    |
 | 0.x         | 6.2        | 5.4 - 5.6 | none                                    |
