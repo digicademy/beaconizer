@@ -12,7 +12,7 @@ Installation
 Requirements
 ^^^^^^^^^^^^
 
-- Supported TYPO3 versions: 7.6 - 8.7
+- Supported TYPO3 versions: 8.7 – 9.5
 
 Installation
 ^^^^^^^^^^^^

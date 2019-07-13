@@ -5,7 +5,7 @@ namespace ADWLM\Beaconizer\Domain\Model;
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2018 Torsten Schrade <Torsten.Schrade@adwmainz.de>, Academy of Sciences and Literature | Mainz
+ *  Torsten Schrade <Torsten.Schrade@adwmainz.de>, Academy of Sciences and Literature | Mainz
  *
  *  All rights reserved
  *
@@ -46,7 +46,6 @@ class Links extends AbstractEntity
      * Provider of the link
      *
      * @var \ADWLM\Beaconizer\Domain\Model\Providers $provider
-     * @lazy
      */
     protected $provider;
 

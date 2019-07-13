@@ -5,7 +5,7 @@ namespace ADWLM\Beaconizer\Domain\Repository;
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2018 Torsten Schrade <Torsten.Schrade@adwmainz.de>, Academy of Sciences and Literature | Mainz
+ *  Torsten Schrade <Torsten.Schrade@adwmainz.de>, Academy of Sciences and Literature | Mainz
  *
  *  All rights reserved
  *

@@ -12,9 +12,10 @@ The documentation is at [http://docs.typo3.org/typo3cms/extensions/beaconizer/](
 
 ## TYPO3 compatibility
 
-| Version     | TYPO3      | PHP       | Support/Development                     |
+| Version     | TYPO3      | PHP       | Support                                 |
 | ----------- | ---------- | ----------|---------------------------------------- |
-| 1.x         | 7.6 - 8.7  | 5.6 - 7.2 | Features, Bugfixes, Security Updates    |
+| 1.1         | 8.7 - 9.5  | 7.2       | Features, Bugfixes, Security Updates    |
+| 1.0         | 7.6 - 8.7  | 5.6 - 7.2 | none                                    |
 | 0.x         | 6.2        | 5.4 - 5.6 | none                                    |
 
 ## Changelog
@@ -26,4 +27,4 @@ Please have a look into the [documentation](https://docs.typo3.org/typo3cms/exte
 This software is licensed under the terms of the GNU General Public License v2
 as published by the Free Software Foundation.
 
-Copyright 2018 <a href="https://orcid.org/0000-0002-0953-2818">Torsten Schrade</a> | <a href="http://www.adwmainz.de">Academy of Sciences and Literature | Mainz</a>
+Copyright <a href="https://orcid.org/0000-0002-0953-2818">Torsten Schrade</a> | <a href="http://www.adwmainz.de">Academy of Sciences and Literature | Mainz</a>

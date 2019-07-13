@@ -5,7 +5,7 @@ namespace ADWLM\Beaconizer\Task;
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2018 Torsten Schrade <Torsten.Schrade@adwmainz.de>, Academy of Sciences and Literature | Mainz
+ *  (c) 2019 Torsten Schrade <Torsten.Schrade@adwmainz.de>, Academy of Sciences and Literature | Mainz
  *
  *  All rights reserved
  *
@@ -29,6 +29,7 @@ namespace ADWLM\Beaconizer\Task;
 use TYPO3\CMS\Core\Utility\ArrayUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Scheduler\Task\AbstractTask;
+use TYPO3\CMS\Core\Database\ConnectionPool;
 
 class HarvestingTask extends AbstractTask
 {
@@ -44,8 +45,13 @@ class HarvestingTask extends AbstractTask
         // iterate over selected providers
         foreach ($this->providersToHarvest as $uid) {
 
-            $currentProvider = $GLOBALS['TYPO3_DB']->exec_SELECTgetSingleRow('*',
-                'tx_beaconizer_domain_model_providers', 'uid=' . (int)$uid);
+            $currentProvider = GeneralUtility::makeInstance(ConnectionPool::class)
+                ->getConnectionForTable('tx_beaconizer_domain_model_providers')
+                ->select(
+                    ['*'], // fields
+                    'tx_beaconizer_domain_model_providers', // from
+                    [ 'uid' => (int)$uid ] // where
+                )->fetch();
 
             if ($currentProvider === false || $currentProvider === null) {
                 throw new \RuntimeException('Provider with uid ' . (int)$uid . ' could not be retrieved from database',
@@ -70,16 +76,19 @@ class HarvestingTask extends AbstractTask
                 $beaconFileContent = GeneralUtility::getUrl($currentProvider['feed'], 0, false, $report);
 
                 if ($beaconFileContent === false) {
+
                     ($report['error'] > 0 && $report['message']) ? $errorMessage = '. ' . htmlspecialchars($report['message']) : $errorMessage = '';
                     $GLOBALS['BE_USER']->simplelog('Could not retrieve BEACON file from provider ' . htmlspecialchars($currentProvider['title']) . $errorMessage,
                         $extKey = 'beaconizer', 2);
                     // $executionResult = FALSE;
+
                 } else {
                     // determine if file should be harvested
                     $fileShouldBeHarvested = $this->shouldFileBeHarvested($beaconFileContent, $currentProvider);
 
                     // if harvesting is enforced or file should be harvested start a new import cycle ...
                     if ($this->forceHarvesting || $fileShouldBeHarvested === true) {
+
                         // ... by creating a temporary file ...
                         $temporaryBeaconFile = GeneralUtility::tempnam('beaconizer_');
                         $write = GeneralUtility::writeFileToTypo3tempDir($temporaryBeaconFile, $beaconFileContent);
@@ -87,9 +96,15 @@ class HarvestingTask extends AbstractTask
                             $GLOBALS['BE_USER']->simplelog(htmlspecialchars($write), $extKey = 'beaconizer', 2);
                             $temporaryBeaconFile = '';
                         }
+
                         // ... and dropping stale temporary links of the current provider
-                        $GLOBALS['TYPO3_DB']->exec_DELETEquery('tx_beaconizer_domain_model_links',
-                            'pid = 0 AND provider=' . (int)$uid);
+                        GeneralUtility::makeInstance(ConnectionPool::class)
+                        ->getConnectionForTable('tx_beaconizer_domain_model_links')
+                        ->delete(
+                            'tx_beaconizer_domain_model_links', // from
+                            [ 'pid' => 0, 'provider' =>  (int)$uid] // where
+                        );
+
                     } else {
                         $GLOBALS['BE_USER']->simplelog('File from provider ' . htmlspecialchars($currentProvider['title']) . ' has not changed since last harvesting, doing nothing',
                             $extKey = 'beaconizer', 0);
@@ -301,6 +316,7 @@ class HarvestingTask extends AbstractTask
                                 $linkValues['crdate'] = time();
                                 $linkValues['pid'] = 0;
                                 $linkValues['hidden'] = 1;
+
                                 // collect new link record for later bulk insertion
                                 $rowsToInsert[] = $linkValues;
 
@@ -340,22 +356,40 @@ class HarvestingTask extends AbstractTask
                         $extKey = 'beaconizer', 2);
                 }
 
-                // insert new records in a batch (values will be escaped internally)
+                // insert new records in a batch
                 if (count($rowsToInsert) > 0) {
-                    $GLOBALS['TYPO3_DB']->exec_INSERTmultipleRows(
-                        'tx_beaconizer_domain_model_links',
-                        array(
-                            'source_identifier',
-                            'annotation',
-                            'target_identifier',
-                            'provider',
-                            'tstamp',
-                            'crdate',
-                            'pid',
-                            'hidden'
-                        ),
-                        $rowsToInsert
-                    );
+
+                    // since doctrine-dbal works with placeholders and there is a placeholder limit
+                    // of 65,535 (2^16-1) for MySQL/MariaDB a workaround is needed: chunk the array
+                    // into smaller units and bulk insert them one after the other
+                    // @see: https://stackoverflow.com/questions/18100782/import-of-50k-records-in-mysql-gives-general-error-1390-prepared-statement-con
+                    if (count($rowsToInsert) > 8000) {
+                        $bulksToInsert = array_chunk($rowsToInsert, 8000);
+                    } else {
+                        $bulksToInsert = [0 => $rowsToInsert];
+                    }
+
+                    // bulk insert records
+                    foreach ($bulksToInsert as $bulk) {
+
+                        GeneralUtility::makeInstance(ConnectionPool::class)
+                            ->getConnectionForTable('tx_beaconizer_domain_model_links')
+                            ->bulkInsert(
+                                'tx_beaconizer_domain_model_links', // from
+                                $bulk, // data
+                                [
+                                    'source_identifier',
+                                    'annotation',
+                                    'target_identifier',
+                                    'provider',
+                                    'tstamp',
+                                    'crdate',
+                                    'pid',
+                                    'hidden'
+                                ] // columns
+                            );
+
+                    }
                 }
 
                 // log action
@@ -364,24 +398,43 @@ class HarvestingTask extends AbstractTask
 
                 // in case we have to continue with the next scheduler run keep the temporary file
                 if ($noDelete === 1) {
+
                     $harvestingData['fileName'] = $temporaryBeaconFile;
                     $harvestingData['totalImported'] = $harvestingData['totalImported'] + count($rowsToInsert);
                     $harvestingData['linePointer'] = $linePointer;
                     $fieldsValues['harvesting_data'] = serialize($harvestingData);
                     $fieldsValues['harvesting_timestamp'] = time();
+
                 } else {
+
                     GeneralUtility::unlink_tempfile($temporaryBeaconFile);
                     $fieldsValues['harvesting_data'] = '';
                     $fieldsValues['harvesting_timestamp'] = time();
                     $GLOBALS['BE_USER']->simplelog('Finished harvesting file from provider ' . htmlspecialchars($currentProvider['title']),
                         $extKey = 'beaconizer', 0);
+
                     // throw away 'old' links for current provider
-                    $GLOBALS['TYPO3_DB']->exec_DELETEquery('tx_beaconizer_domain_model_links',
-                        'pid > 0 AND provider=' . (int)$uid);
+                    $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
+                        ->getQueryBuilderForTable('tx_beaconizer_domain_model_links');
+                    $rows = $queryBuilder
+                       ->delete('tx_beaconizer_domain_model_links')
+                       ->where(
+                          $queryBuilder->expr()->gt('pid', $queryBuilder->createNamedParameter(0, \PDO::PARAM_INT)),
+                          $queryBuilder->expr()->eq('provider', $queryBuilder->createNamedParameter($uid, \PDO::PARAM_INT))
+                       )
+                       ->execute();
+
                     // rotate newly harvested links from pid 0 to target pid
                     ($this->importOnPid > 0) ? $pid = (int)$this->importOnPid : $pid = (int)$currentProvider['pid'];
-                    $GLOBALS['TYPO3_DB']->exec_UPDATEquery('tx_beaconizer_domain_model_links', 'provider=' . (int)$uid,
-                        array('pid' => $pid, 'hidden' => 0));
+
+                    GeneralUtility::makeInstance(ConnectionPool::class)
+                        ->getConnectionForTable('tx_beaconizer_domain_model_links')
+                        ->update(
+                            'tx_beaconizer_domain_model_links',
+                            [ 'pid' => (int)$pid, 'hidden' => 0 ], // set
+                            [ 'provider' => (int)$uid ] // where
+                        );
+
                     $GLOBALS['BE_USER']->simplelog('Rotating harvested links for provider ' . htmlspecialchars($currentProvider['title']) . ' to page with ID ' . $pid,
                         $extKey = 'beaconizer', 0);
                 }
@@ -412,11 +465,13 @@ class HarvestingTask extends AbstractTask
                 }
 
                 // update current provider with meta information (values will be escaped internally by API function)
-                $GLOBALS['TYPO3_DB']->exec_UPDATEquery(
-                    'tx_beaconizer_domain_model_providers',
-                    'uid=' . (int)$uid,
-                    $fieldsValues
-                );
+                GeneralUtility::makeInstance(ConnectionPool::class)
+                    ->getConnectionForTable('tt_content')
+                    ->update(
+                        'tx_beaconizer_domain_model_providers',
+                        $fieldsValues, // set
+                        [ 'uid' => (int)$uid ] // where
+                    );
             }
         }
 
@@ -432,8 +487,15 @@ class HarvestingTask extends AbstractTask
     {
         $selectedProviders = array();
         foreach ($this->providersToHarvest as $uid) {
-            $currentProvider = $GLOBALS['TYPO3_DB']->exec_SELECTgetSingleRow('title',
-                'tx_beaconizer_domain_model_providers', 'uid=' . (int)$uid);
+
+            $currentProvider = GeneralUtility::makeInstance(ConnectionPool::class)
+                ->getConnectionForTable('tx_beaconizer_domain_model_providers')
+                ->select(
+                    ['title'], // fields
+                    'tx_beaconizer_domain_model_providers', // from
+                    [ 'uid' => (int)$uid ] // where
+                )->fetch();
+
             $selectedProviders[] = htmlspecialchars($currentProvider['title']);
         }
 

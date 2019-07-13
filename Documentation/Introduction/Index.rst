@@ -55,10 +55,9 @@ Scheduler task for harvesting link data from BEACON file providers
 Credits
 ^^^^^^^
 
-This extension is developed by the `Digital Academy <http://www.digitale-akademie.de/>`_
+This extension is developed by the `Digital Academy <http://www.adwmainz.de/digitalitaet/digitale-akademie.html>`_
 of the `Academy of Sciences and Literature | Mainz <http://www.adwmainz.de>`_ for
-our `Digital Humanities Projects <http://www.digitale-akademie.de/projekte/matrix.html>`_.
-
+our Digital Humanities Projects.
 
 Join development
 ^^^^^^^^^^^^^^^^

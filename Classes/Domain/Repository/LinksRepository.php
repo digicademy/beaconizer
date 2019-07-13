@@ -5,7 +5,7 @@ namespace ADWLM\Beaconizer\Domain\Repository;
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2018 Torsten Schrade <Torsten.Schrade@adwmainz.de>, Academy of Sciences and Literature | Mainz
+ *  Torsten Schrade <Torsten.Schrade@adwmainz.de>, Academy of Sciences and Literature | Mainz
  *
  *  All rights reserved
  *
@@ -26,8 +26,11 @@ namespace ADWLM\Beaconizer\Domain\Repository;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
+use TYPO3\CMS\Core\Database\ConnectionPool;
+use Doctrine\DBAL\Connection;
 
 /**
  * Repository for BEACON links
@@ -81,14 +84,20 @@ class LinksRepository extends Repository
      */
     public function findRowsToMap($tableName, $cObj)
     {
+        $pages = GeneralUtility::intExplode(',', $cObj->data['pages']);
 
-        $pages = $GLOBALS['TYPO3_DB']->cleanIntList($cObj->data['pages']);
+        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
+            ->getQueryBuilderForTable('tt_content');
 
-        $result = $GLOBALS['TYPO3_DB']->exec_SELECTgetRows(
-            '*',
-            $tableName,
-            'pid IN(' . $pages . ')' . $cObj->enableFields($tableName)
-        );
+        $result = $queryBuilder
+            ->select('*')
+            ->from($tableName)
+            ->where(
+                $queryBuilder->expr()->in('pid', ':pages')
+            )
+            ->setParameter('pages', $pages, Connection::PARAM_INT_ARRAY)
+            ->execute()
+            ->fetchAll();
 
         return $result;
 

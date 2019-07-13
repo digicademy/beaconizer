@@ -19,27 +19,27 @@ return array(
             'disabled' => 'hidden',
         ),
         'searchFields' => 'source_identifier,annotation,target_identifier',
-        'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('beaconizer') . 'Resources/Public/Icons/tx_beaconizer_domain_model_links.svg'
+        'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('beaconizer') . 'Resources/Public/Icons/tx_beaconizer_domain_model_links.svg'
     ),
     'interface' => array(
         'showRecordFieldList' => '
-			hidden,
-			provider,
-			source_identifier,
-			annotation,
-			target_identifier,
-		',
+            hidden,
+            provider,
+            source_identifier,
+            annotation,
+            target_identifier,
+        ',
     ),
     'types' => array(
         '1' => array(
             'showitem' => '
-			--div--;LLL:EXT:beaconizer/Resources/Private/Language/locallang_db.xlf:tx_beaconizer_domain_model_links.div1,
-				hidden,
-				provider,
-				source_identifier,
-				annotation,
-				target_identifier,
-		'
+            --div--;LLL:EXT:beaconizer/Resources/Private/Language/locallang_db.xlf:tx_beaconizer_domain_model_links.div1,
+                hidden,
+                provider,
+                source_identifier,
+                annotation,
+                target_identifier,
+            '
         ),
     ),
     'palettes' => array(
@@ -85,6 +85,7 @@ return array(
             'label' => 'LLL:EXT:beaconizer/Resources/Private/Language/locallang_db.xlf:tx_beaconizer_domain_model_links.provider',
             'config' => array(
                 'type' => 'select',
+                'renderType' => 'selectSingle',
                 'foreign_table' => 'tx_beaconizer_domain_model_providers',
                 'size' => 1,
                 'minitems' => 1,

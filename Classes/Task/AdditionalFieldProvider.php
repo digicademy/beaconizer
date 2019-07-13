@@ -30,6 +30,8 @@ use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Scheduler\AdditionalFieldProviderInterface;
 use TYPO3\CMS\Scheduler\Controller\SchedulerModuleController;
 use TYPO3\CMS\Scheduler\Task\AbstractTask;
+use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class AdditionalFieldProvider implements AdditionalFieldProviderInterface
 {
@@ -223,16 +225,13 @@ class AdditionalFieldProvider implements AdditionalFieldProviderInterface
     protected function getAvailableProviders()
     {
 
-        // get available providers by DB query
-        $availableProviders = $GLOBALS['TYPO3_DB']->exec_SELECTgetRows(
-            'uid,title',
-            'tx_beaconizer_domain_model_providers',
-            'deleted = 0 AND hidden = 0',
-            null,
-            'title ASC',
-            null,
-            null
-        );
+        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tx_beaconizer_domain_model_providers');
+
+        $availableProviders = $queryBuilder
+            ->select('uid', 'title')
+            ->from('tx_beaconizer_domain_model_providers')
+            ->execute()
+            ->fetchAll();
 
         if (!is_array($availableProviders)) {
             $availableProviders = array();

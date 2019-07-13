@@ -14,9 +14,6 @@ Beaconizer
 
 .. only:: html
 
-	:Classification:
-		beaconizer
-
 	:Version:
 		|release|
 
@@ -30,28 +27,19 @@ Beaconizer
 		GND, VIAF, BEACON, Linked Data, Semantic Web
 
 	:Copyright:
-		2018
+		2015-2019
 
 	:Author:
 		Torsten Schrade
-
-	:Email:
-		Torsten.Schrade@adwmainz.de
 
 	:Institution:
 		Academy of Sciences and Literature | Mainz
 
 	:License:
-		This document is published under the Open Content License
-		available from http://www.opencontent.org/opl.shtml
+		`CC BY 4.0 <https://creativecommons.org/licenses/by/4.0/>`_
 
 	:Rendered:
 		|today|
-
-	The content of this document is related to TYPO3,
-	a GNU/GPL CMS/Framework available from `www.typo3.org <http://www.typo3.org/>`_.
-
-	**Other versions of this document**
 
 	**Table of Contents**
 
