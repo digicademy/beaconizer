@@ -1,5 +1,7 @@
 # TYPO3 Beaconizer
 
+[![DOI](https://zenodo.org/badge/37733925.svg)](https://zenodo.org/badge/latestdoi/37733925)
+
 ## About
 
 With the TYPO3 Beaconizer you can harvest links based on authority files (BEACON files), enrich your detail views with context related links ("see also" links) and open your data to external applications and webservices via dynamically generated BEACON files.
